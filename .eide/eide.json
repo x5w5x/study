@@ -2,7 +2,9 @@
   "name": "1-1-led",
   "type": "ARM",
   "dependenceList": [],
-  "srcDirs": [],
+  "srcDirs": [
+    "System"
+  ],
   "virtualFolder": {
     "name": "<virtual_root>",
     "files": [],
@@ -351,9 +353,12 @@
           "User",
           "Library",
           ".cmsis/include",
-          "RTE/_Target 1"
+          "RTE/_Target 1",
+          "System"
         ],
-        "libList": [],
+        "libList": [
+          "System"
+        ],
         "defineList": [
           "USE_STDPERIPH_DRIVER"
         ]
