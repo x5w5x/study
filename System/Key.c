@@ -1,5 +1,13 @@
 #include "stm32f10x.h"
 #include"Delay.h"
+
+
+/**
+ * @Key_Init
+ * @brief   初始化按键
+ * @param   无
+ * @retval  无
+ */
 void Key_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -10,7 +18,13 @@ void Key_Init(void)
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 
-
+/**
+ *  @Key_GetNum
+ * @brief   获取按键值
+ * @param   无
+ * @retval  按键值
+ *  
+ */
 uint8_t Key_GetNum(void)
 {
     uint8_t key = 0;
