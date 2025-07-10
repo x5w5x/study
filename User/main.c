@@ -6,24 +6,27 @@
 #include"Buzzer.h"
 #include"LightSensor.h"
 #include "OLED.h"
-// #include "OLED_Font.h"
+#include "CountSensor.h"
+#include "Encoder.h"
 int main(void)
 {
+int16_t num=0;
+	Encoder_Init();
 	OLED_Init();
-	OLED_ShowString(1,1,"Hello World!");
-	OLED_ShowString(2,1,"^_^");
-	OLED_ShowNum(3,1,123456789,9);
+	// OLED_ShowString(1,1,"Hello World!");
+	// OLED_ShowString(2,1,"^_^");
+	
  
 
 
 	
 
 	while(1){
-		    
+		num=Encoder_Get();
 	
+		Delay_ms(100);
 		
-		
-		
+		OLED_ShowNum(3,1,num,6);
 
 
 
