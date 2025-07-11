@@ -11,8 +11,9 @@
 int main(void)
 {
 int16_t num=0;
-	Encoder_Init();
+	
 	OLED_Init();
+	Encoder_Init();
 	// OLED_ShowString(1,1,"Hello World!");
 	// OLED_ShowString(2,1,"^_^");
 	

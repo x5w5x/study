@@ -318,7 +318,8 @@
             }
           ]
         },
-        "options": "null"
+        "options": "null",
+        "archExtensions": ""
       },
       "uploader": "STLink",
       "uploadConfig": {
@@ -389,5 +390,5 @@
       }
     }
   },
-  "version": "3.5"
+  "version": "3.6"
 }
