@@ -19,18 +19,17 @@ float angle=0;
 int main(void)
 {
 	OLED_Init();
-	Key_Init();
-	PWM_Init();
-	IC_Init();
 
-PWM_SetPrescaler(720-1);//Freq=72M/(PSC+1)/100
-PWM_SetCompare1(2);//Duty=CCR/100
+	 Encoder_Init();
+
+
 
 
 
 
 	while(1){
-
+		num=Encoder_Get();
+OLED_ShowNum(1,1,num,5);
 	}
 	
 	
