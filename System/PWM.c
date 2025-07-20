@@ -58,3 +58,9 @@ void PWM_SetCompare1(uint16_t Compare)
     TIM_SetCompare1(TIM2,Compare);
 
 }
+
+
+void PWM_SetPrescaler(uint16_t Prescaler)
+{
+    TIM_PrescalerConfig(TIM2,Prescaler,TIM_PSCReloadMode_Immediate);
+}
