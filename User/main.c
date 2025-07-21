@@ -13,13 +13,13 @@
 #include"Serov.h"
 #include"IC.h"
 
-uint16_t num=0;
+int16_t num=0;
 uint8_t keynum;
 float angle=0;
 int main(void)
 {
 	OLED_Init();
-
+Timer_Init();
 	 Encoder_Init();
 
 
@@ -28,11 +28,21 @@ int main(void)
 
 
 	while(1){
-		num=Encoder_Get();
-OLED_ShowNum(1,1,num,5);
+	
+OLED_ShowSignedNum(1,1,num,5);
+
 	}
 	
 	
 
 }
 
+
+void TIM2_IRQHandler(void)
+{
+	if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET)
+	{
+		num=Encoder_Get();
+		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
+	}
+}

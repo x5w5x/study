@@ -7,6 +7,7 @@ extern uint16_t num;
  * @retval 无
  *  1s=72000000/7200=10000
  */
+//定时1000ms
 void Timer_Init(void)
 {
    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE); //开启定时器2时钟
@@ -21,7 +22,8 @@ void Timer_Init(void)
 
 
 
-   TIM_ClearFlag(TIM2,TIM_IT_Update); 
+   TIM_ClearFlag(TIM2,TIM_IT_Update); //清除定时器2中断标志位防止初始化进入中断
+
    TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE); //使能定时器2中断
 
    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //设置中断优先级分组
@@ -34,6 +36,15 @@ void Timer_Init(void)
 
    TIM_Cmd(TIM2,ENABLE); //启动定时器2
 }
+/*
+
+*/
+/**
+ * @breif 外部时钟源定时器初始化
+ * @param 无
+ * @retval 无
+ *    1s=72000000/7200=10000
+ */
 
 void Timer_ETRInit(void){
    
@@ -79,12 +90,12 @@ void Timer_ETRInit(void){
 
 
 }
-void TIM2_IRQHandler(void)
-{
-   if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //判断是否是定时器2中断
-   {
-    num++;
-      TIM_ClearITPendingBit(TIM2,TIM_IT_Update); //清除中断标志位
-      //处理定时器2中断
-   }
-}
+// void TIM2_IRQHandler(void)
+// {
+//    if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //判断是否是定时器2中断
+//    {
+//     num++;
+//       TIM_ClearITPendingBit(TIM2,TIM_IT_Update); //清除中断标志位
+//       //处理定时器2中断
+//    }
+// }
