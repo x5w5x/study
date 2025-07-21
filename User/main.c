@@ -12,15 +12,16 @@
 #include"pwm.h"
 #include"Serov.h"
 #include"IC.h"
-
-int16_t num=0;
+#include"AD.h"
+uint16_t ad0,ad1,ad2,ad3;
+float Voltage=0;
 uint8_t keynum;
 float angle=0;
 int main(void)
 {
 	OLED_Init();
-Timer_Init();
-	 Encoder_Init();
+	AD_Init();
+
 
 
 
@@ -28,21 +29,20 @@ Timer_Init();
 
 
 	while(1){
-	
-OLED_ShowSignedNum(1,1,num,5);
+	ad0=AD_GetValue(ADC_Channel_0);
+	ad1=AD_GetValue(ADC_Channel_1);
+	ad2=AD_GetValue(ADC_Channel_2);
+	ad3=AD_GetValue(ADC_Channel_3);
+		
+	OLED_ShowNum(1,1,ad0,5);
+	OLED_ShowNum(2,1,ad1,5);
+	OLED_ShowNum(3,1,ad2,5);
+	OLED_ShowNum(4,1,ad3,5);
+	Delay_ms(100);
+
 
 	}
 	
 	
 
-}
-
-
-void TIM2_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET)
-	{
-		num=Encoder_Get();
-		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
-	}
 }
