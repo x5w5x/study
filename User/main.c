@@ -13,13 +13,14 @@
 #include"Serov.h"
 #include"IC.h"
 #include"AD.h"
-uint16_t ad0,ad1,ad2,ad3;
-float Voltage=0;
-uint8_t keynum;
-float angle=0;
+#include"DMA.h"
+
+
+
 int main(void)
 {
 	OLED_Init();
+	
 	AD_Init();
 
 
@@ -28,17 +29,15 @@ int main(void)
 
 
 
+
 	while(1){
-	ad0=AD_GetValue(ADC_Channel_0);
-	ad1=AD_GetValue(ADC_Channel_1);
-	ad2=AD_GetValue(ADC_Channel_2);
-	ad3=AD_GetValue(ADC_Channel_3);
-		
-	OLED_ShowNum(1,1,ad0,5);
-	OLED_ShowNum(2,1,ad1,5);
-	OLED_ShowNum(3,1,ad2,5);
-	OLED_ShowNum(4,1,ad3,5);
-	Delay_ms(100);
+	
+	OLED_ShowNum(1,1,AD_Value[0],4);
+	OLED_ShowNum(2,1,AD_Value[1],4);
+	OLED_ShowNum(3,1,AD_Value[2],4);
+	OLED_ShowNum(4,1,AD_Value[3],4);
+
+	
 
 
 	}
