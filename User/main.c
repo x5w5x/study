@@ -15,7 +15,7 @@
 #include"AD.h"
 #include"DMA.h"
 #include"Serial.h"
-
+uint8_t data;
 
 int main(void)
 {
@@ -23,18 +23,23 @@ int main(void)
 	Serial_Init();
 	
 
-Serial_SendByte('a');
-uint8_t data[]={0x42,0x43,0x44,0x45};
-Serial_SendArray(data,4);
-Serial_SendString("Hello World\r\n!");
 
-Serial_SendNum(123456789);
 
 
 
 	while(1){
 
-
+// if(USART_GetFlagStatus(USART1,USART_FLAG_RXNE)==SET)
+// 	{
+// 	    data=USART_ReceiveData(USART1);
+// 		OLED_ShowHexNum(1,1,data,2);
+// 	}
+if(Serial_GetFlag()==1)
+	{
+		data=Serial_GetRxData();
+		Serial_SendByte(data);
+		OLED_ShowHexNum(1,1,data,2);
+	}
 	
 
 
