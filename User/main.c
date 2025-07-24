@@ -37,7 +37,7 @@ int main(void)
 if(Serial_GetFlag()==1)
 	{
 		data=Serial_GetRxData();
-		Serial_SendByte(data);
+		Serial_Printf("data=%s","hello");
 		OLED_ShowHexNum(1,1,data,2);
 	}
 	
