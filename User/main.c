@@ -14,28 +14,26 @@
 #include"IC.h"
 #include"AD.h"
 #include"DMA.h"
-
+#include"Serial.h"
 
 
 int main(void)
 {
 	OLED_Init();
+	Serial_Init();
 	
-	AD_Init();
 
+Serial_SendByte('a');
+uint8_t data[]={0x42,0x43,0x44,0x45};
+Serial_SendArray(data,4);
+Serial_SendString("Hello World\r\n!");
 
-
-
-
+Serial_SendNum(123456789);
 
 
 
 	while(1){
-	
-	OLED_ShowNum(1,1,AD_Value[0],4);
-	OLED_ShowNum(2,1,AD_Value[1],4);
-	OLED_ShowNum(3,1,AD_Value[2],4);
-	OLED_ShowNum(4,1,AD_Value[3],4);
+
 
 	
 
