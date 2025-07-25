@@ -10,6 +10,10 @@
 */
 uint8_t Serial_RxData;
 uint8_t Serial_RxFlag = 0;
+uint8_t Serial_TXPacket[256];
+uint8_t Serial_RXPacket[256];
+char Serial_RXString[256];
+
 void Serial_Init(void)
 {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);//开启USART1时钟
@@ -113,16 +117,92 @@ uint8_t Serial_GetRxData(void)
 }
 
 
+void Serial_SendPacket(uint16_t len)
+{
+    Serial_SendByte(0xFF);
+    Serial_SendArray(Serial_TXPacket,len);
+    Serial_SendByte(0xFE);
+}
+
+
+// void USART1_IRQHandler(void)
+// {
+//     static uint8_t RxSate = 0;
+//      static uint8_t pRxSate = 0;
+//     if(USART_GetITStatus(USART1,USART_IT_RXNE) == SET)
+//     {
+//         uint8_t RxData = USART_ReceiveData(USART1);
+//      if(RxSate == 0)
+//         {
+//             if(RxData == 0xFF)
+//             {
+//                 RxSate = 1;
+//                 pRxSate=0;
+//             }
+//         }
+//         else if(RxSate == 1)
+//         {
+//             Serial_RXPacket[pRxSate++] = RxData;
+//             if(pRxSate == 4){
+//                 RxSate = 2;
+//             }
+//         }
+//         else if(RxSate == 2)
+//         {
+//             if(RxData == 0xFE)
+//             {
+//                 RxSate = 0;
+//                 Serial_RxFlag= 1;
+
+//             }
+          
+//         }
+//         USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+//     }
+// }
 
 
 
 void USART1_IRQHandler(void)
 {
+    static uint8_t RxState = 0;
+    static uint8_t pRxSate = 0;
     if(USART_GetITStatus(USART1,USART_IT_RXNE) == SET)
     {
-       Serial_RxData = USART_ReceiveData(USART1);
-       Serial_RxFlag = 1;
-        //处理接收到的数据
+        uint8_t RxData = USART_ReceiveData(USART1);
+     if(RxState == 0)
+        {
+            if(RxData == '@')
+            {
+                RxState = 1;
+                pRxSate=0;
+            }
+        }
+        else if(RxState == 1)
+        {   if(RxData=='\r')
+            {
+                RxState = 2;
+                
+            }
+            else
+            {
+           Serial_RXString[pRxSate++] = RxData;		//将数据存入数据包数组的指定位置
+        
+            }
+        }
+        else if(RxState == 2)
+        {
+            if(RxData == '\n')
+            {
+                RxState = 0;
+                Serial_RxFlag= 1;
+                Serial_RXPacket[pRxSate++] ='\0';
+
+            }
+          
+        }
         USART_ClearITPendingBit(USART1,USART_IT_RXNE);
     }
 }
+
+

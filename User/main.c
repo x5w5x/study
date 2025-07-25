@@ -16,11 +16,13 @@
 #include"DMA.h"
 #include"Serial.h"
 uint8_t data;
-
+uint8_t keynum=0;
 int main(void)
-{
+{Key_Init();
 	OLED_Init();
 	Serial_Init();
+	
+
 	
 
 
@@ -29,22 +31,11 @@ int main(void)
 
 	while(1){
 
-// if(USART_GetFlagStatus(USART1,USART_FLAG_RXNE)==SET)
-// 	{
-// 	    data=USART_ReceiveData(USART1);
-// 		OLED_ShowHexNum(1,1,data,2);
-// 	}
-if(Serial_GetFlag()==1)
-	{
-		data=Serial_GetRxData();
-		Serial_Printf("data=%s","hello");
-		OLED_ShowHexNum(1,1,data,2);
-	}
-	
+if(Serial_GetFlag()==1){
+OLED_ShowString(4,1,Serial_RXString);
 
 
-	}
-	
 	
 
 }
+}}
