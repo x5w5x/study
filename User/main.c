@@ -15,27 +15,26 @@
 #include"AD.h"
 #include"DMA.h"
 #include"Serial.h"
+#include"IIC.h"
+#include"mpu6050.h"
+int16_t ax=0,ay,az,gx,gy,gz;
 uint8_t data;
-uint8_t keynum=0;
+uint8_t id=0;
 int main(void)
-{Key_Init();
+{
+	
+	
 	OLED_Init();
-	Serial_Init();
-	
+	MPU6050_Init();
 
-	
-
+	OLED_ShowHexNum(1,1,MPU6050_GetID(),3);
 
 
-
-
+		
 	while(1){
-
-if(Serial_GetFlag()==1){
-OLED_ShowString(4,1,Serial_RXString);
-
-
+		
 	
+		
 
-}
+
 }}
