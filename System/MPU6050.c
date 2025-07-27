@@ -10,7 +10,7 @@ void MPU6050_WaitEvent(I2C_TypeDef* I2Cx, uint32_t I2C_EVENT)
     while(I2C_CheckEvent(I2Cx,I2C_EVENT) != SUCCESS)
     {
         if(timeout-- == 0)
-            berak;
+            break;
     }
 }
 
