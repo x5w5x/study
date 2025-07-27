@@ -27,11 +27,12 @@ int main(void)
 	OLED_Init();
 	MPU6050_Init();
 
-	OLED_ShowHexNum(1,1,MPU6050_GetID(),3);
+	// OLED_ShowHexNum(1,1,MPU6050_GetID(),3);
 
 
 		
 	while(1){
+	
 		
 	
 		
