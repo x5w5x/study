@@ -163,46 +163,57 @@ void Serial_SendPacket(uint16_t len)
 
 
 
+// void USART1_IRQHandler(void)
+// {
+//     static uint8_t RxState = 0;
+//     static uint8_t pRxSate = 0;
+//     if(USART_GetITStatus(USART1,USART_IT_RXNE) == SET)
+//     {
+//         uint8_t RxData = USART_ReceiveData(USART1);
+//      if(RxState == 0)
+//         {
+//             if(RxData == '@')
+//             {
+//                 RxState = 1;
+//                 pRxSate=0;
+//             }
+//         }
+//         else if(RxState == 1)
+//         {   if(RxData=='\r')
+//             {
+//                 RxState = 2;
+                
+//             }
+//             else
+//             {
+//            Serial_RXString[pRxSate++] = RxData;		//将数据存入数据包数组的指定位置
+        
+//             }
+//         }
+//         else if(RxState == 2)
+//         {
+//             if(RxData == '\n')
+//             {
+//                 RxState = 0;
+//                 Serial_RxFlag= 1;
+//                 Serial_RXPacket[pRxSate++] ='\0';
+
+//             }
+          
+//         }
+//         USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+//     }
+// }
+
+
 void USART1_IRQHandler(void)
 {
-    static uint8_t RxState = 0;
-    static uint8_t pRxSate = 0;
-    if(USART_GetITStatus(USART1,USART_IT_RXNE) == SET)
-    {
-        uint8_t RxData = USART_ReceiveData(USART1);
-     if(RxState == 0)
-        {
-            if(RxData == '@')
-            {
-                RxState = 1;
-                pRxSate=0;
-            }
-        }
-        else if(RxState == 1)
-        {   if(RxData=='\r')
-            {
-                RxState = 2;
-                
-            }
-            else
-            {
-           Serial_RXString[pRxSate++] = RxData;		//将数据存入数据包数组的指定位置
-        
-            }
-        }
-        else if(RxState == 2)
-        {
-            if(RxData == '\n')
-            {
-                RxState = 0;
-                Serial_RxFlag= 1;
-                Serial_RXPacket[pRxSate++] ='\0';
-
-            }
-          
-        }
-        USART_ClearITPendingBit(USART1,USART_IT_RXNE);
-    }
+	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)		//判断是否是USART1的接收事件触发的中断
+	{
+		Serial_RxData = USART_ReceiveData(USART1);				//读取数据寄存器，存放在接收的数据变量
+		Serial_RxFlag = 1;										//置接收标志位变量为1
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);			//清除USART1的RXNE标志位
+																//读取数据寄存器会自动清除此标志位
+																//如果已经读取了数据寄存器，也可以不执行此代码
+	}
 }
-
-

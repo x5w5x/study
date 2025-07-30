@@ -37,12 +37,20 @@ uint16_t GetCount(void)
 {
     return count;
 }
+
+
+
 void EXTI15_10_IRQHandler(void)
 {
-    Delay_ms(100);//消抖
-    if(EXTI_GetITStatus(EXTI_Line14)==SET)//判断是否是EXTI_Line14触发的中断
-    {
-        count++;
-        EXTI_ClearITPendingBit(EXTI_Line14);//清除中断标志位
-    }
+	if (EXTI_GetITStatus(EXTI_Line14) == SET)		//判断是否是外部中断14号线触发的中断
+	{
+		/*如果出现数据乱跳的现象，可再次判断引脚电平，以避免抖动*/
+		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14) == 0)
+		{
+			count++;					//计数值自增一次
+		}
+		EXTI_ClearITPendingBit(EXTI_Line14);		//清除外部中断14号线的中断标志位
+													//中断标志位必须清除
+													//否则中断将连续不断地触发，导致主程序卡死
+	}
 }

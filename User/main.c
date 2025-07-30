@@ -17,30 +17,29 @@
 // #include"Serial.h"
 // #include"W25Q64.h"
 // #include"mpu6050.h"
-// #include"BKP.h"
+#include"BKP.h"
 #include"RTC.h"
+uint8_t rxdata;
 
-
-uint16_t RTC_Date[]={2025,7,29,22,26,0};
 int main(void)
 {
 	
-	
+
 	OLED_Init();
 	
-	
+
+OLED_ShowString(1,1,"CNT:");
+OLED_ShowString(2,1,"ALR:");
+OLED_ShowString(3,1,"ALRF:");
 
 
 
 	
-
 
 
 		
 	while(1){
-
-
-
+		
 
 
 }}
