@@ -26,7 +26,7 @@ int main(void)
 	
 
 	OLED_Init();
-	
+	RTC_Init();
 
 OLED_ShowString(1,1,"CNT:");
 OLED_ShowString(2,1,"ALR:");
@@ -39,7 +39,7 @@ OLED_ShowString(3,1,"ALRF:");
 
 		
 	while(1){
-		
+		OLED_ShowNum(4,1,RTC_GetCounter(),10);
 
 
 }}
