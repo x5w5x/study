@@ -17,47 +17,33 @@
 // #include"Serial.h"
 // #include"W25Q64.h"
 // #include"mpu6050.h"
-#include"BKP.h"
-#include"RTC.h"
-uint8_t rxdata;
-
+// #include"BKP.h"
+// #include"RTC.h"
+// #include"FLASH.h"
+#include"Store.h"
+uint8_t keynum;
 int main(void)
 {
 	
+OLED_Init();
+Key_Init();
+Store_Init();
 
-	OLED_Init();//初始化OLED
-	Key_Init();//初始化按键
-	OLED_ShowString(1,1,"WWDG TEST");
-	if(RCC_GetFlagStatus(RCC_FLAG_WWDGRST)==SET)
-	{
-		OLED_ShowString(2,1,"WWDGRST");
-		Delay_ms(500);
-		OLED_ShowString(2,1,"        ");
-		Delay_ms(100);
-	    RCC_ClearFlag();
-	}
-	else
-	{
-	    OLED_ShowString(3,1,"RST");
-		Delay_ms(500);
-		OLED_ShowString(3,1,"        ");
-		Delay_ms(100);
-	}
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG,ENABLE);//使能WWDG时钟
-	WWDG_SetPrescaler(WWDG_Prescaler_8);//设置WWDG分频系数
-	WWDG_SetWindowValue(0x40 | 21);//设置WWDG窗口值
-	WWDG_Enable(0x40 | 54);//使能WWDG
 
 
 	while(1){
-		Key_GetNum();
 		
-	
-		OLED_ShowString(4,1,"FEED");
-		Delay_ms(20);
-		OLED_ShowString(4,1,"     ");
-		Delay_ms(15);
-		WWDG_SetCounter(0x40 | 54);//喂狗
+keynum=Key_GetNum();
+if(keynum==1){
+    Store_Data[1]+=1;
+	Store_Data[2]+=3;
+	Store_Save();
+}
+if(keynum==2){
+  Store_Clear();
+}
+
+
 }}
 
 
