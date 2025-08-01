@@ -4,7 +4,7 @@ void IIC_Init(void);
 void IIC_Start(void);
 void IIC_Stop(void);
 void IIC_SendByte(uint8_t Byte);
-uint8_t IIC_ReadByte(void);
+uint8_t mIIC_ReadByte(void);
 void IIC_SendAck(uint8_t AckBit);
 uint8_t IIC_ReadAck(void);
 #endif
