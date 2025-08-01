@@ -1,5 +1,5 @@
 #include"stm32f10x.h"
-
+#include"OLED_Font.h"
 #include"Delay.h"
 /*“˝Ω≈≈‰÷√*/
 #define OLED_W_SCL(x)		GPIO_WriteBit(GPIOB, GPIO_Pin_8, (BitAction)(x))
@@ -153,3 +153,71 @@ void OLED_Init(void)
 }
 
 
+void OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t size)
+{
+	if(size==6)
+	{
+    OLED_SetCursor(x,y);
+	for(int8_t i=0;i<6;i++)
+	{
+		OLED_WriteData(OLED_F6x8[chr-' '][i]);
+	}
+	}
+
+	else if(size==8)
+	{
+    OLED_SetCursor(x,y);
+	for(int8_t i=0;i<8;i++)
+	{
+		OLED_WriteData(OLED_F8x16[chr-32][i]);
+	}
+	OLED_SetCursor(x,y+1);
+	for(int8_t i=0;i<8;i++)
+	{
+		OLED_WriteData(OLED_F8x16[chr-32][i+8]);
+	}
+
+	}
+}
+
+
+void OLED_ShowString(uint8_t x, uint8_t y, uint8_t *str, uint8_t size)
+{
+	while(*str != '\0')
+	{
+		OLED_ShowChar(x+=(size==6?6:8), y, *(str++), size);
+	}
+}
+
+
+
+void OLED_ShowImage(uint8_t x, uint8_t y, uint8_t width, uint8_t height,const uint8_t *Image)
+{
+   for(uint8_t j=0;j<height;j++)
+    {
+        OLED_SetCursor(x,y+j);
+        for(uint8_t i=0;i<width;i++)
+        {
+            OLED_WriteData(Image[i+j*width]);
+        }
+    }
+}
+
+// void OLED_ShowChinese(uint8_t x, uint8_t y, uint8_t *str)
+// {
+//     char SingleChinese[4]={0};
+// 	uint8_t pChinese=0;
+// 	while(*str != '\0')
+// 	{
+// 		pChinese=*str++;
+// 		SingleChinese[0]=pChinese;
+// 		SingleChinese[1]=*(str++);
+// 		SingleChinese[2]=*(str++);
+// 		SingleChinese[3]=*(str++);
+// 		OLED_SetCursor(x,y);
+// 		for(int8_t i=0;i<16;i++)
+// 		{
+// 			OLED_WriteData(OLED_F16x16[SingleChinese[0]-0x80][i]);
+// 		}
+// 	}
+// }
