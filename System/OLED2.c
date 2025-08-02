@@ -286,11 +286,11 @@ void OLED_GRAM_Clear(void)
 //»­µã
 void OLED_DrawPoint(uint8_t x, uint8_t y)
 {
-    uint8_t n,m;
-	OLED_GRAM[y/8][x]=OLED_GRAM[n][x]|(0x01<<(y%8));
+	OLED_GRAM[y/8][x]=OLED_GRAM[y/8][x]|(0x01<<(y%8));
 
-	// n=y/8;
-	// m=y%8;
-	// OLED_GRAM[n][x]=OLED_GRAM[n][x]|(0x01<<(m));
-
+}
+//Çåµã
+void OLED_ClearPoint(uint8_t x, uint8_t y)
+{
+	OLED_GRAM[y/8][x]=OLED_GRAM[y/8][x]&(~(0x01<<(y%8)));
 }

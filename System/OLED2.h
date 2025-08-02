@@ -12,5 +12,6 @@ void OLED_ShowImage(uint8_t x, uint8_t y, uint8_t width, uint8_t height,const ui
 void OLED_GRAM_Fill(void);
 void OLED_GRAM_Clear(void);
 void OLED_DrawPoint(uint8_t x, uint8_t y);
+void OLED_ClearPoint(uint8_t x, uint8_t y);
 void OLED_UpdateGRAM(void);
 #endif /* _OLED2_H */

@@ -61,8 +61,13 @@ OLED_DrawPoint(48,48);
 OLED_DrawPoint(56,56);
 OLED_DrawPoint(63,63);
 OLED_UpdateGRAM();
-
-
+Delay_ms(1000);
+OLED_ClearPoint(63,63);
+OLED_ClearPoint(32,32);
+OLED_UpdateGRAM();
+Delay_ms(1000);
+OLED_GRAM_Clear();
+OLED_UpdateGRAM();
 
 
 
