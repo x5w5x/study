@@ -35,16 +35,33 @@ const uint8_t gImage_1[]=
 0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,
 0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x3F,
 };
+
+
+extern uint8_t OLED_GRAM[8][128];
+
+
 int main(void)
-{
-	
+{	
 
 OLED_Init();
-OLED_ShowImage(0,0,30,4,gImage_1);
-// OLED_ShowImage(16,0,16,2,gImage_1[1]);
-// OLED_ShowImage(32,0,16,2,gImage_1[2]);
-// OLED_ShowImage(48,0,16,2,gImage_1[3]);
-OLED_ShowString(0,5,"Hello World!",6);
+
+// OLED_ShowImage(0,0,30,4,gImage_1);
+// // OLED_ShowImage(16,0,16,2,gImage_1[1]);
+// // OLED_ShowImage(32,0,16,2,gImage_1[2]);
+// // OLED_ShowImage(48,0,16,2,gImage_1[3]);
+// OLED_ShowString(0,5,"Hello World!",6);
+OLED_GRAM_Clear();
+OLED_DrawPoint(0,0);
+OLED_DrawPoint(8,8);
+OLED_DrawPoint(16,16);
+OLED_DrawPoint(24,24);
+OLED_DrawPoint(32,32);
+OLED_DrawPoint(40,40);
+OLED_DrawPoint(48,48);
+OLED_DrawPoint(56,56);
+OLED_DrawPoint(63,63);
+OLED_UpdateGRAM();
+
 
 
 

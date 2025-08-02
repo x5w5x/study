@@ -5,6 +5,15 @@
 #define OLED_W_SCL(x)		GPIO_WriteBit(GPIOB, GPIO_Pin_8, (BitAction)(x))
 #define OLED_W_SDA(x)		GPIO_WriteBit(GPIOB, GPIO_Pin_9, (BitAction)(x))
 
+
+uint8_t OLED_GRAM[8][128];//缓存数据
+
+
+
+
+
+
+
 /*引脚初始化*/
 void OLED_I2C_Init(void)
 {
@@ -104,6 +113,20 @@ void OLED_Clear(void)
         }
     }
 }
+
+void OLED_On(void)
+{
+    uint8_t i,j;
+    for(i=0;i<8;i++)
+    {
+        OLED_SetCursor(0,i);
+        for(j=0;j<128;j++)
+        {
+            OLED_WriteData(0xFF);
+			
+        }
+    }
+}
 void OLED_Init(void)
 {
 	OLED_I2C_Init();
@@ -115,6 +138,7 @@ void OLED_Init(void)
 	
 	OLED_WriteCommand(0xA8);	//设置多路复用率
 	OLED_WriteCommand(0x3F);
+
 	
 	OLED_WriteCommand(0xD3);	//设置显示偏移
 	OLED_WriteCommand(0x00);
@@ -221,3 +245,52 @@ void OLED_ShowImage(uint8_t x, uint8_t y, uint8_t width, uint8_t height,const ui
 // 		}
 // 	}
 // }
+
+
+void OLED_UpdateGRAM(void)
+{
+    uint8_t i,j;
+    for(i=0;i<8;i++)
+    {
+        OLED_SetCursor(0,i);
+        for(j=0;j<128;j++)
+        {
+            OLED_WriteData(OLED_GRAM[i][j]);
+        }
+    }
+}
+
+
+void OLED_GRAM_Fill(void)
+{
+    for(uint8_t i=0;i<8;i++)
+{
+	for(uint8_t  j=0;j<128;j++)
+	{
+		OLED_GRAM[i][j]=0xFF;
+	}
+}
+}
+
+
+void OLED_GRAM_Clear(void)
+{
+    for(uint8_t i=0;i<8;i++)
+{
+	for(uint8_t j=0;j<128;j++)
+	{
+		OLED_GRAM[i][j]=0x00;
+	}
+}
+}
+//画点
+void OLED_DrawPoint(uint8_t x, uint8_t y)
+{
+    uint8_t n,m;
+	OLED_GRAM[y/8][x]=OLED_GRAM[n][x]|(0x01<<(y%8));
+
+	// n=y/8;
+	// m=y%8;
+	// OLED_GRAM[n][x]=OLED_GRAM[n][x]|(0x01<<(m));
+
+}
