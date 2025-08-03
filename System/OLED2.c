@@ -134,7 +134,9 @@ void OLED_Init(void)
 	OLED_WriteCommand(0xAE);	//关闭显示
 	
 	OLED_WriteCommand(0xD5);	//设置显示时钟分频比/振荡器频率
-	OLED_WriteCommand(0x80);
+	// OLED_WriteCommand(0x80);//默认刷新频率
+
+	OLED_WriteCommand(0xE0);//自定义刷新频率
 	
 	OLED_WriteCommand(0xA8);	//设置多路复用率
 	OLED_WriteCommand(0x3F);
@@ -293,4 +295,195 @@ void OLED_DrawPoint(uint8_t x, uint8_t y)
 void OLED_ClearPoint(uint8_t x, uint8_t y)
 {
 	OLED_GRAM[y/8][x]=OLED_GRAM[y/8][x]&(~(0x01<<(y%8)));
+}
+
+
+
+
+void FourPoint(uint8_t x,uint8_t y)
+{
+	for(uint8_t i=y;i<64;i+=2)
+	{
+	    for(uint8_t j=x;j<128;j+=2)
+		{
+			OLED_GRAM[i/8][j]|=(0x01<<(i%8));
+		}
+	}
+}
+
+
+
+void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2,uint8_t dot)
+{
+    uint8_t lx=x2>x1?x2-x1:x1-x2;
+    uint8_t ly=y2>y1?y2-y1:y1-y2;
+	uint8_t dm,i;
+	float dx,dy,x,y;
+	dm=lx>ly?lx:ly;
+
+	dx=(float)(x2-x1)/dm;
+	dy=(float)(y2-y1)/dm;
+	x=(float)x1+0.5;
+	y=(float)y1+0.5;
+	for(i=0;i<dm;i++)
+	{
+	if(!(i%dot))
+		OLED_DrawPoint((uint8_t)x,(uint8_t)y);
+		x+=dx;
+		y+=dy;
+	}
+}
+
+
+void OLED_ClearLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2,uint8_t dot)
+{
+    uint8_t lx=x2>x1?x2-x1:x1-x2;
+    uint8_t ly=y2>y1?y2-y1:y1-y2;
+	uint8_t dm,i;
+	float dx,dy,x,y;
+	dm=lx>ly?lx:ly;
+
+	dx=(float)(x2-x1)/dm;
+	dy=(float)(y2-y1)/dm;
+	x=(float)x1+0.5;
+	y=(float)y1+0.5;
+	for(i=0;i<dm;i++)
+	{
+	if(!(i%dot))
+		OLED_ClearPoint((uint8_t)x,(uint8_t)y);
+		x+=dx;
+		y+=dy;
+	}
+}
+
+void OLED_DrawRect(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+	OLED_DrawLine(x1,y1,x2,y1,1);
+	OLED_DrawLine(x2,y1,x2,y2,1);
+	OLED_DrawLine(x2,y2,x1,y2,1);
+	OLED_DrawLine(x1,y2,x1,y1,1);
+	
+}
+//画实心矩形
+void OLED_DrawBlock(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+	
+	uint8_t d=y2>y1?1:-1;
+	for(uint8_t i=0;i<(y2>y1?y2-y1:y1-y2);i++)
+	{
+		OLED_DrawLine(x1,y1+i*d,x2,y1+i*d,1);
+	}
+}
+
+uint8_t ADCdata[128]
+= {
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    
+    // P 波（21-30）：心房去极化
+    135, 140, 145, 150, 145, 140, 135, 130, 128, 128,
+    
+    // PR 段（31-40）
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    
+    // QRS 波群（41-60）：心室去极化
+    120, 110, 100, 90, 80, 70, 60, 70, 90, 110,
+    130, 150, 170, 190, 200, 190, 170, 150, 130, 110,
+    
+    // ST 段（61-80）
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    
+    // T 波（81-100）：心室复极化
+    140, 145, 150, 155, 160, 155, 150, 145, 140, 135,
+    130, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    
+    // 下一个周期（101-128）
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+    128, 128, 128, 128, 128, 128, 128, 128
+};
+void OLED_ADCWaveLine(uint8_t step)
+{
+    uint8_t Pointx,Pointy,Range=63,PointXlast,PointYlast;
+	float Scale=(float)Range/255;
+	for(uint8_t i=0;i<128;i+=step)
+	{
+		PointXlast=Pointx;
+		PointYlast=Pointy;
+		Pointx=i;
+		Pointy=ADCdata[i]*Scale;
+		OLED_DrawLine(PointXlast,63-PointYlast,Pointx,63-Pointy,1);
+		// Pointx=i;
+		// Pointy=ADCdata[i]*Scale;
+		// OLED_DrawPoint(Pointx,63-Pointy);
+	}
+}
+
+
+
+
+void OLED_ADCWavePoint(uint8_t step)
+{
+    uint8_t Pointx,Pointy,Range=63;
+	float Scale=(float)Range/255;
+	for(uint8_t i=0;i<128;i+=step)
+	{
+		
+		Pointx=i;
+		Pointy=ADCdata[i]*Scale;
+		OLED_DrawPoint(Pointx,63-Pointy);
+	}
+}
+
+// uint8_t WaveData[128];
+// void ButtonWave(void)
+// {
+   
+// 	for(uint8_t i=127;i>0;i--)
+// 	WaveData[i]=WaveData[i-1];
+// 	if(Key_GetNum()==1)
+// 	WaveData[0]=60;
+// 	else
+// 	WaveData[0]=10;
+// 	OLED_GRAM_Clear();
+
+// 	for(uint8_t i=0;i<127;i++)
+	
+// 		OLED_DrawLine(i,63-WaveData[i],i+1,63-WaveData[i+1],1);
+		
+	
+// 	OLED_UpdateGRAM();Delay_ms(50);
+
+// }
+
+#include"math.h"
+void OLED_DrawSin( uint8_t x0,uint8_t y0)
+{
+
+	float Si,Sx,Sy,Rad;
+	for(Si=-180;Si<180;Si+=0.5)
+	{
+	    Rad=Si*3.14/180;
+		Sx=Si/3.5;
+		Sy=25*sin(Rad);
+		OLED_DrawPoint((uint8_t)(x0+Sx),64-(uint8_t)(y0+Sy));
+		// OLED_UpdateGRAM();
+
+	
+	}
+}
+
+void OLED_DrawCircle(uint8_t x0,uint8_t y0,uint8_t r)
+{
+	float Rx,Ry,angle,Rad;
+	OLED_DrawPoint(x0,y0);
+	for(angle=0;angle<359;angle+=1)
+	{
+		Rad=angle*3.14/180;
+		Rx=r*cos(Rad);
+		Ry=r*sin(Rad);
+		OLED_DrawPoint((uint8_t)(x0+Rx),64-(uint8_t)y0+Ry);
+	}
+    
 }

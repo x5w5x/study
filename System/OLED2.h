@@ -14,4 +14,13 @@ void OLED_GRAM_Clear(void);
 void OLED_DrawPoint(uint8_t x, uint8_t y);
 void OLED_ClearPoint(uint8_t x, uint8_t y);
 void OLED_UpdateGRAM(void);
+void FourPoint(uint8_t x,uint8_t y);
+void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2,uint8_t dot);
+void OLED_ClearLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2,uint8_t dot);
+void OLED_DrawRect(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+void OLED_DrawBlock(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+void OLED_ADCWavePoint(uint8_t step);
+void OLED_ADCWaveLine(uint8_t step);
+void OLED_DrawSin( uint8_t x0,uint8_t y0);
+void OLED_DrawCircle(uint8_t x0,uint8_t y0,uint8_t r);
 #endif /* _OLED2_H */
