@@ -23,4 +23,8 @@ void OLED_ADCWavePoint(uint8_t step);
 void OLED_ADCWaveLine(uint8_t step);
 void OLED_DrawSin( uint8_t x0,uint8_t y0);
 void OLED_DrawCircle(uint8_t x0,uint8_t y0,uint8_t r);
+void OLED_ClearCircle(uint8_t x0,uint8_t y0,uint8_t r);
+void OLED_DrawElliptic(uint8_t x0,uint8_t y0,uint8_t a,uint8_t b);
+//
+// void ButtonWave(void);
 #endif /* _OLED2_H */

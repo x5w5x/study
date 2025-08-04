@@ -459,8 +459,10 @@ void OLED_ADCWavePoint(uint8_t step)
 }
 
 // uint8_t WaveData[128];
+
 // void ButtonWave(void)
 // {
+
    
 // 	for(uint8_t i=127;i>0;i--)
 // 	WaveData[i]=WaveData[i-1];
@@ -498,6 +500,7 @@ void OLED_DrawSin( uint8_t x0,uint8_t y0)
 
 void OLED_DrawCircle(uint8_t x0,uint8_t y0,uint8_t r)
 {
+	/*
 	float Rx,Ry,angle,Rad;
 	OLED_DrawPoint(x0,y0);
 	for(angle=0;angle<359;angle+=1)
@@ -506,6 +509,60 @@ void OLED_DrawCircle(uint8_t x0,uint8_t y0,uint8_t r)
 		Rx=r*cos(Rad);
 		Ry=r*sin(Rad);
 		OLED_DrawPoint((uint8_t)(x0+Rx),64-(uint8_t)y0+Ry);
+	
+	}
+    */
+   int x=0,y=r,d=3-2*r;
+   while (x<=y)
+   {
+    OLED_DrawPoint(x0+x,y0+y);
+    OLED_DrawPoint(x0-x,y0+y);
+    OLED_DrawPoint(x0+x,y0-y);
+    OLED_DrawPoint(x0-x,y0-y);
+    OLED_DrawPoint(x0+y,y0+x);
+    OLED_DrawPoint(x0-y,y0+x);
+    OLED_DrawPoint(x0+y,y0-x);
+    OLED_DrawPoint(x0-y,y0-x);
+    if(d<0)
+    d+=4*x+6;
+    else
+    {
+        d+=4*(x-y)+10;
+        y--;
+   }
+   x++;
+   }
+   OLED_UpdateGRAM();
+   
+
+}
+
+
+void OLED_ClearCircle(uint8_t x0,uint8_t y0,uint8_t r)
+{
+	float Rx,Ry,angle,Rad;
+	OLED_DrawPoint(x0,y0);
+	for(angle=0;angle<359;angle+=1)
+	{
+		Rad=angle*3.14/180;
+		Rx=r*cos(Rad);
+		Ry=r*sin(Rad);
+		OLED_ClearPoint((uint8_t)(x0+Rx),64-(uint8_t)y0+Ry);
+		
 	}
     
+}
+
+
+void OLED_DrawElliptic(uint8_t x0,uint8_t y0,uint8_t a,uint8_t b)
+{
+	float Rx,Ry,angle,Rad;
+	OLED_DrawPoint(x0,y0);
+	for(angle=0;angle<359;angle+=1)
+	{
+		Rad=angle*3.14/180;
+		Rx=a*cos(Rad);
+		Ry=b*sin(Rad);
+		OLED_DrawPoint((uint8_t)(x0+Rx),64-(uint8_t)y0+Ry);
+	}
 }

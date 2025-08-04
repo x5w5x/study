@@ -40,27 +40,18 @@ const uint8_t gImage_1[]=
 extern uint8_t OLED_GRAM[8][128];
 
 
-
 int main(void)
 {	
 
 OLED_Init();
-// OLED_DrawSin(64,32);
-// OLED_DrawCircle(64,32,32);
-// // OLED_UpdateGRAM();
-// for(uint8_t i=1;i<32;i+=3)
-// {
-//     OLED_DrawCircle(64,32,i);
-// OLED_UpdateGRAM();
-// // Delay_ms(100);
-
-// }
-OLED_On();
-
+LED_Init();
+Key_Init();
+OLED_DrawCircle(64,32,30);
+OLED_UpdateGRAM();
 
 	while(1){
-		
 
+	
 
 
 }}

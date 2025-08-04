@@ -30,7 +30,7 @@ uint8_t Key_GetNum(void)
     uint8_t key = 0;
     if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0){
         Delay_ms(20);
-        while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0);
+        // while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0);
         Delay_ms(20);
         key = 1;
     }
