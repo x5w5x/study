@@ -1,15 +1,36 @@
 #include"stm32f10x.h"
 #include"OLED_Font.h"
 #include"Delay.h"
-/*引脚配置*/
+// /*引脚配置*/
+/*
+//慎用会花屏通信速度太快了
 #define OLED_W_SCL(x)		GPIO_WriteBit(GPIOB, GPIO_Pin_8, (BitAction)(x))
+											
 #define OLED_W_SDA(x)		GPIO_WriteBit(GPIOB, GPIO_Pin_9, (BitAction)(x))
-
+*/
 
 uint8_t OLED_GRAM[8][128];//缓存数据
 
 
 
+
+
+void OLED_W_SCL(uint8_t BitValue)
+{
+	GPIO_WriteBit(GPIOB, GPIO_Pin_8, (BitAction)BitValue);
+	
+}
+
+
+void OLED_W_SDA(uint8_t BitValue)
+{
+	GPIO_WriteBit(GPIOB, GPIO_Pin_9, (BitAction)BitValue);
+}
+
+
+
+
+//
 
 
 
@@ -72,6 +93,7 @@ void OLED_I2C_SendByte(uint8_t Byte)
 	}
 	OLED_W_SCL(1);	//额外的一个时钟，不处理应答信号
 	OLED_W_SCL(0);
+	
 }
 
 
