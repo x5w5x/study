@@ -5,6 +5,7 @@
             "label": "build",
             "type": "shell",
             "command": "${command:eide.project.build}",
+           
             "group": "build",
             "problemMatcher": []
         },
@@ -19,7 +20,10 @@
             "label": "build and flash",
             "type": "shell",
             "command": "${command:eide.project.buildAndFlash}",
-            "group": "build",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
             "problemMatcher": []
         },
         {

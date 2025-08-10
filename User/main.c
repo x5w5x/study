@@ -47,23 +47,22 @@ int main(void)
 {	
 Delay_ms(500);
 Max7219_GPIO_Init();
+
+
 Delay_ms(500);
 Init_MAX7219();
 
 
-// OLED_Init();
-// LED_Init();
-// Key_Init();
-// OLED_DrawCircle(64,32,30);
-// OLED_UpdateGRAM();
 
 	while(1){
- GPIOA->BSRR = Max7219_pinCS_GPIO; // CS置高（等效原Max7219_pinCS = 1）
+
+Max7219_W_CS(1);
         Delay_ms(1);
         
         for(uint8_t j=0; j<38; j++) {
             for(uint8_t i=1; i<9; i++) {
-                Write_Max7219(i, code_disp1[j][i-1]);
+                Max7219_Write(i, code_disp1[j][i-1]);
+
             }
             Delay_ms(1000); // 每图案显示1秒
         }

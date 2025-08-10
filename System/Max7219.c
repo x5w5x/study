@@ -1,5 +1,10 @@
-#include "max7219.h"
+#include"stm32f10x.h"
 #include"Delay.h"
+#define SPI_IS_HARDWARE 0 //(1:硬件SPI 0:软件SPI)
+
+
+
+//字库数据
 u8 code_disp1[38][8]={
 {0x3C,0x42,0x42,0x42,0x42,0x42,0x42,0x3C},//0
 {0x08,0x18,0x28,0x08,0x08,0x08,0x08,0x3E},//1
@@ -41,25 +46,48 @@ u8 code_disp1[38][8]={
 {0xFE,0xBA,0x92,0xBA,0x92,0x9A,0xBA,0xFE},//国
 };
 
+void Max7219_W_CS(uint8_t bitValue)
+{
+    GPIO_WriteBit(GPIOA,GPIO_Pin_3,(BitAction)bitValue); //CS
+}
+
+void Max7219_W_CLK(uint8_t bitValue)
+{
+    GPIO_WriteBit(GPIOA,GPIO_Pin_5,(BitAction)bitValue); //CLK
+}
+
+void Max7219_W_DIN(uint8_t bitValue)
+{
+    GPIO_WriteBit(GPIOA,GPIO_Pin_7,(BitAction)bitValue); //DIN
+}
+
+
+
+
+#if SPI_IS_HARDWARE //使用硬件SPI
 
 
 /* 完全保持原有函数实现 */
-void Max7219_GPIO_Init(void) {
-    SPI_InitTypeDef  SPI1_InitStructure;
-    GPIO_InitTypeDef GPIO_InitStructure;
-     
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO|RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,ENABLE);
+void Max7219_GPIO_Init(void)
+ {
     
-    GPIO_InitStructure.GPIO_Pin = Max7219_pinCS_GPIO;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO|RCC_APB2Periph_GPIOA, ENABLE);//使能GPIOA时钟
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,ENABLE);//使能SPI1时钟
+
+    SPI_InitTypeDef  SPI1_InitStructure;//SPI1初始化结构体
+    GPIO_InitTypeDef GPIO_InitStructure;//GPIO初始化结构体
+     
+   
+    // SPI1引脚配置
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOA,&GPIO_InitStructure);
-    
-    GPIO_InitStructure.GPIO_Pin = Max7219_pinCLK_GPIO|SPI_MISO_GPIO|Max7219_pinDIN_GPIO;
+    //
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA,&GPIO_InitStructure);
-     
+     //SPI1配置
     SPI1_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
     SPI1_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
     SPI1_InitStructure.SPI_DataSize = SPI_DataSize_8b;
@@ -69,27 +97,71 @@ void Max7219_GPIO_Init(void) {
     SPI1_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
     SPI1_InitStructure.SPI_NSS = SPI_NSS_Soft; 
     SPI1_InitStructure.SPI_CRCPolynomial = 7;
+    // SPI1初始化
     SPI_I2S_DeInit(SPI1);
     SPI_Init(SPI1, &SPI1_InitStructure); 
     SPI_Cmd(SPI1, ENABLE);
 }
 
-void Write_Max7219(u8 addr,u8 dat) {
-    GPIOA->BRR = Max7219_pinCS_GPIO; // CS拉低
-    
+void Max7219_Write(u8 addr,u8 dat) {
+    Max7219_W_CS(0);
     SPI_I2S_SendData(SPI1, addr);
     Delay_us(10);
     SPI_I2S_SendData(SPI1, dat);
     Delay_us(10);
-    
-    GPIOA->BSRR = Max7219_pinCS_GPIO; // CS拉高
+    Max7219_W_CS(1);
+}
+#else
+
+
+void Max7219_GPIO_Init(void)
+{
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3|GPIO_Pin_5|GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA,&GPIO_InitStructure);
+
 }
 
-/* 保持原有初始化函数不变 */
+
+void Max7219_Write_byte(uint8_t dat)
+{
+    uint8_t i;
+    Max7219_W_CS(0);
+    for(i=0;i<8;i++)
+    {
+        Max7219_W_CLK(0);
+        if(dat&0x80)
+        {
+            Max7219_W_DIN(1);
+        }
+        else
+        {
+            Max7219_W_DIN(0);
+        }
+        dat<<=1;
+        Max7219_W_CLK(1);
+        }
+    
+}
+
+
+void Max7219_Write(uint8_t addr,uint8_t dat)
+{ Max7219_W_CS(0);
+    Max7219_Write_byte(addr);
+    Max7219_Write_byte(dat);
+     Max7219_W_CS(1);
+}
+
+#endif
+
+
 void Init_MAX7219(void) {
-    Write_Max7219(0x09, 0x00);
-    Write_Max7219(0x0a, 0x03);
-    Write_Max7219(0x0b, 0x07);
-    Write_Max7219(0x0c, 0x01);
-    Write_Max7219(0x0f, 0x00);
+    Max7219_Write(0x09, 0x00);
+    Max7219_Write(0x0a, 0x03);
+    Max7219_Write(0x0b, 0x07);
+    Max7219_Write(0x0c, 0x01);
+    Max7219_Write(0x0f, 0x00);
 }
