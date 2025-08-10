@@ -39,7 +39,6 @@ const uint8_t gImage_1[]=
 
 extern uint8_t OLED_GRAM[8][128];
 
-
 int main(void)
 {	
 
