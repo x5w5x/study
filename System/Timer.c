@@ -1,11 +1,35 @@
 #include"stm32f10x.h"
 
-extern uint16_t num;
+
+#define TIM2_time 0 //(1-1s 0-1ms)
+
+
+
+#if TIM2_time
+
+#define TIM2_period 10000-1 //计数器周期
+#define TIM2_prescaler 7200-1 //预分频系数
+
+#else
+
+#define TIM2_period 1000-1 //计数器周期
+#define TIM2_prescaler 72-1 //预分频系数
+
+#endif 
+
+
+
 /**
  * @breif 定时器初始化
  * @param 无
  * @retval 无
  *  1s=72000000/7200=10000
+ * period=10000-1
+ * prescaler=7200-1
+ * 
+ * 1ms=72000000/7200/10000
+ * period=1000-1
+ * prescaler=72-1
  */
 //定时1000ms
 void Timer_Init(void)
@@ -15,8 +39,8 @@ void Timer_Init(void)
    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
    TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1; //时钟分频
    TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; //向上计数
-   TIM_TimeBaseStructure.TIM_Period=10000-1; //计数器周期
-   TIM_TimeBaseStructure.TIM_Prescaler=7200-1; //预分频系数
+   TIM_TimeBaseStructure.TIM_Period=TIM2_period; //计数器周期
+   TIM_TimeBaseStructure.TIM_Prescaler=TIM2_prescaler; //预分频系数
    TIM_TimeBaseStructure.TIM_RepetitionCounter=0; //重复计数器
    TIM_TimeBaseInit(TIM2,&TIM_TimeBaseStructure); //初始化定时器2
 
@@ -54,7 +78,7 @@ void Timer_ETRInit(void){
 
  GPIO_InitTypeDef GPIO_InitStructure;
  GPIO_InitStructure.GPIO_Pin=GPIO_Pin_0;
- GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IPD;
+ GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IPD;//输入下拉
  GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
  GPIO_Init(GPIOA,&GPIO_InitStructure);
 
