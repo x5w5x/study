@@ -2,16 +2,16 @@
 #include"Delay.h"
 #include "Key.h"
 
-#define KEY_PRESSED 1
-#define KEY_RELEASED 0
+#define KEY_PRESSED 1 //定义按下
+#define KEY_RELEASED 0 //定义释放
 
-#define KEY_TIME_DOUBLE 200
-#define KEY_TIME_LONG 1000
-#define KEY_TIME_REPEAT 100
+#define KEY_TIME_DOUBLE 200 //双击时间阈值
+#define KEY_TIME_LONG 1000 //长按时间阈值
+#define KEY_TIME_REPEAT 100 //重复按键时间阈值
 
 
-uint8_t Key_Flag[4];
-uint8_t Key_Num;
+uint8_t Key_Flag[4]; //按键标志位
+uint8_t Key_Num; //按键值
 /**
  * @Key_Init
  * @brief   初始化按键
@@ -22,10 +22,13 @@ void Key_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    //1，2按键GPIO初始化
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_11;//按键引脚默认为高电平
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;//上拉输入
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+    //3，4按键GPIO初始化
      GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13|GPIO_Pin_15;//按键引脚默认为高电平
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;//上拉输入
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -233,7 +236,7 @@ void Key_Init(void)
 
 
 
-
+//获取按键状态
 
 uint8_t Key_GetState(uint8_t key_n)
 {
@@ -266,7 +269,7 @@ uint8_t Key_GetState(uint8_t key_n)
 }
 
 
-
+//定时器中断扫描按键
 
 void Key_Tick(void)
 {
@@ -307,21 +310,22 @@ void Key_Tick(void)
        {
            if(CurrState[i]==KEY_PRESSED)
            {
-           Time[i]=KEY_TIME_LONG;
-           s[i]=1;}
+            Time[i]=KEY_TIME_LONG;
+            s[i]=1;
+            }
        }
        else if(s[i]==1)
        {
            if(CurrState[i]==KEY_RELEASED)
            {
             Time[i]=KEY_TIME_DOUBLE;
-           s[i]=2;
+            s[i]=2;
            }
            else if (Time[i]==0)
            {
-            Time[i]=KEY_TIME_REPEAT;
-            Key_Flag[i] |= KEY_LONG;
-            s[i]=4;
+                Time[i]=KEY_TIME_REPEAT;
+                Key_Flag[i] |= KEY_LONG;
+                s[i]=4;
            }
        }
        else if(s[i]==2)
@@ -342,7 +346,7 @@ void Key_Tick(void)
        {
            if(CurrState[i]==KEY_RELEASED)
            {
-            s[i]=0;
+                s[i]=0;
             }
        }
        else if(s[i]==4)
@@ -358,23 +362,20 @@ void Key_Tick(void)
             s[i]=4;
            }
        }
-
-
-
-
-
-
     }
     }
 }
 
 
-
-
+/**
+ * @brief  检查按键状态
+ * 
+ * @param n按键编号
+ * @param Flag按键状态
+ * @return uint8_t 
+ */
 uint8_t Key_Check(uint8_t n, uint8_t Flag)
 {
-    
-
     if(Key_Flag[n] & Flag)
     {
         if(Flag !=KEY_HOLD)
