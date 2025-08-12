@@ -10,8 +10,15 @@
 #define KEY_DOUBLE 0x10
 #define KEY_LONG 0x20
 #define KEY_REPEAT 0x40
+
+#define KEY_1 0
+#define KEY_2 1
+#define KEY_3 2
+#define KEY_4 3
+
 void Key_Init(void);
 uint8_t Key_GetNum(void);
 void Key_Tick(void);
-uint8_t Key_Check(uint8_t Flag);
+// uint8_t Key_Check(uint8_t Flag);
+uint8_t Key_Check(uint8_t n, uint8_t Flag);
 #endif

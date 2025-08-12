@@ -34,13 +34,14 @@ LED_Init();
 Key_Init();
 Timer_Init();
 OLED_Init();
-LED_Set(led_flash);
+// LED_Set(led_flash);
 OLED_Clear();
 
 
 	while(1){
-            if(Key_Check(KEY_SINGLE)||Key_Check(KEY_REPEAT))
+            if(Key_Check(KEY_1,KEY_SINGLE)||Key_Check(KEY_1,KEY_REPEAT))
             keynum++;
+           
 
 
       OLED_ShowNum(1,1,keynum,2);
