@@ -368,11 +368,11 @@ void Key_Tick(void)
 
 
 /**
- * @brief  ¼ì²é°´¼ü×´Ì¬
+ * @brief °´¼ü¼ì²â
  * 
- * @param n°´¼ü±àºÅ
- * @param Flag°´¼ü×´Ì¬
- * @return uint8_t 
+ * @param n °´¼ü±àºÅ
+ * @param Flag °´¼ü×´Ì¬
+ * @return uint8_t 1/0
  */
 uint8_t Key_Check(uint8_t n, uint8_t Flag)
 {
