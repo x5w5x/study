@@ -85,8 +85,8 @@ uint8_t LED_Tick_Flag=0;
 void LED_Tick(void)
 { if(LED_Tick_Flag){
     LED1_Count++;
-    LED1_Count%= 1000;
-    if(LED1_Count<500)
+    LED1_Count%= 100;
+    if(LED1_Count<50)
     {
         LED_On(1);
     }

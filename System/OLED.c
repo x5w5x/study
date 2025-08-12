@@ -291,7 +291,7 @@ void OLED_Init(void)
 	OLED_WriteCommand(0xAE);	//关闭显示
 	
 	OLED_WriteCommand(0xD5);	//设置显示时钟分频比/振荡器频率
-	OLED_WriteCommand(0x80);
+	OLED_WriteCommand(0xE0);
 	
 	OLED_WriteCommand(0xA8);	//设置多路复用率
 	OLED_WriteCommand(0x3F);

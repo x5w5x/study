@@ -25,7 +25,7 @@
 // #include"OLED_Font.h"
 #include "Hanlder.h"
 
-uint8_t keynum;
+uint16_t keynum;
 #include"Max7219.h"
 
 int main(void)
@@ -34,21 +34,16 @@ LED_Init();
 Key_Init();
 Timer_Init();
 OLED_Init();
-
+LED_Set(led_flash);
 OLED_Clear();
 
 
 	while(1){
+            if(Key_Check(KEY_SINGLE)||Key_Check(KEY_REPEAT))
+            keynum++;
 
-        keynum=Key_GetNum();
-	if(keynum==1)
-    // LED_On(1);
-     LED_Set(led_turn);
-   
 
-    if(keynum==2)
-     LED_Set(led_flash);
-        
+      OLED_ShowNum(1,1,keynum,2);
 
 
 }}
