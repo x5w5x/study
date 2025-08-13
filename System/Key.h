@@ -1,6 +1,7 @@
 #ifndef _KEY_H
 #define _KEY_H
 
+#define KEY_MODE 1 //0 -阻塞模式 1 -非阻塞模式
 
 
 #define KEY_HOLD 0x01
@@ -15,10 +16,23 @@
 #define KEY_2 1
 #define KEY_3 2
 #define KEY_4 3
-
 void Key_Init(void);
-uint8_t Key_GetNum(void);
-void Key_Tick(void);
-// uint8_t Key_Check(uint8_t Flag);
+
+#if KEY_MODE
 uint8_t Key_Check(uint8_t n, uint8_t Flag);
+void Key_Tick(void);
+#else 
+uint8_t Key_GetNum(void);
+
+#endif
+
+
+
+
+
+
+
+
+// uint8_t Key_Check(uint8_t Flag);
+
 #endif

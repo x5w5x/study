@@ -1,6 +1,17 @@
 #include"stm32f10x.h"
 #include "Delay.h"
 uint16_t count=0;
+
+
+
+
+/**
+ * @brief    计数传感器初始化
+ * @param    无
+ * @retval   无
+ * @note     无
+ * 
+ */
 void CountSensor_Init(void)
 {
     //时钟
@@ -33,13 +44,26 @@ void CountSensor_Init(void)
     NVIC_Init(&NVIC_InitStructure);
 
 }
+/**
+ * @brief   获取计数值
+ *  @param    无
+ * @retval  uint16_t
+ * @note     无
+ * @return uint16_t 
+ */
 uint16_t GetCount(void)
 {
     return count;
 }
 
 
-
+/**
+ * @brief    计算计数值
+ * @param    无
+ * @retval   无
+ * @note     无
+ * 
+ */
 void EXTI15_10_IRQHandler(void)
 {
 	if (EXTI_GetITStatus(EXTI_Line14) == SET)		//判断是否是外部中断14号线触发的中断

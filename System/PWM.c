@@ -7,7 +7,11 @@
 3.配置输出比较单元
 4.配置GPIO (复用推挽输出)
 */
-
+/**
+ * @breif PWM初始化
+ * @retval None
+ * @attention None
+ */
 void PWM_Init(void)
 {
     //开启GPIOA和TIM2时钟
@@ -52,14 +56,22 @@ void PWM_Init(void)
 
 
 
-
+/**
+ * @brief   设置比较值(占空比0-100=0~100%)
+ * 
+ * @param Compare 
+ */
 void PWM_SetCompare1(uint16_t Compare)
 {
     TIM_SetCompare1(TIM2,Compare);
 
 }
 
-
+/**
+ * @brief   设置频率
+ * 
+ * @param Prescaler 
+ */
 void PWM_SetPrescaler(uint16_t Prescaler)
 {
     TIM_PrescalerConfig(TIM2,Prescaler,TIM_PSCReloadMode_Immediate);

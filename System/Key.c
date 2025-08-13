@@ -38,28 +38,41 @@ void Key_Init(void)
 /**
  *  @Key_GetNum
  * @brief   获取按键值
- * @param   无
+ * @param  无（一定先获取按键值不然最后那个扫不到）
  * @retval  按键值
  * @note    阻塞式
  *  
  */
-// uint8_t Key_GetNum(void)
-// {
-//     uint8_t key = 0;
-//     if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0){
-//         Delay_ms(20);
-//         while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0);
-//         Delay_ms(20);
-//         key = 1;
-//     }
-//     if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11)==0){
-//         Delay_ms(20);
-//         while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11)==0);
-//         Delay_ms(20);
-//         key = 2;
-//     }
-//     return key;
-// }
+uint8_t Key_GetNum(void)
+{
+    uint8_t key = 0;
+    if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0){
+        Delay_ms(20);
+        while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)==0);
+        Delay_ms(20);
+        key = 1;
+    }
+    if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11)==0){
+        Delay_ms(20);
+        while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11)==0);
+        Delay_ms(20);
+        key = 2;
+    }
+    if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_13)==1){
+        Delay_ms(20);
+        while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_13)==1);
+        Delay_ms(20);
+        key = 3;
+    }
+      if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15)==1){
+        Delay_ms(20);
+        while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15)==1);
+        Delay_ms(20);
+        key = 4;
+    }
+    
+    return key;
+}
 
 
 // uint8_t Key_GetState(void)

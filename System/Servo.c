@@ -1,5 +1,9 @@
 #include"stm32f10x.h"
-
+/**
+ * @brief    初始化舵机
+ *  @note 引脚 PA1
+ * 
+ */
 void Servo_Init(void)
 {
     //开启GPIOA和TIM2时钟
@@ -41,7 +45,11 @@ void Servo_Init(void)
 
 
 
-
+/**
+ * @brief    设置舵机角度
+ * 
+ * @param angle 
+ */
 void Servo_SetAngle(float angle)
 {
     angle=angle/180*2000+500;

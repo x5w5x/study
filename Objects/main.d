@@ -28,3 +28,12 @@
 .\objects\main.o: .\Library\stm32f10x_usart.h
 .\objects\main.o: .\Library\stm32f10x_wwdg.h
 .\objects\main.o: .\Library\misc.h
+.\objects\main.o: .\System\Delay.h
+.\objects\main.o: .\System\led.h
+.\objects\main.o: .\System\Key.h
+.\objects\main.o: .\System\OLED.h
+.\objects\main.o: .\System\Timer.h
+.\objects\main.o: .\System\pwm.h
+.\objects\main.o: .\System\IC.h
+.\objects\main.o: .\System\Hanlder.h
+.\objects\main.o: .\System\Max7219.h

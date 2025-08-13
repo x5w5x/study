@@ -1,23 +1,5 @@
 #include"stm32f10x.h"
-
-
-#define TIM2_time 0 //(1-1s 0-1ms)
-
-
-
-#if TIM2_time
-
-#define TIM2_period 10000-1 //计数器周期
-#define TIM2_prescaler 7200-1 //预分频系数
-
-#else
-
-#define TIM2_period 1000-1 //计数器周期
-#define TIM2_prescaler 72-1 //预分频系数
-
-#endif 
-
-
+#include"Timer.h"
 
 /**
  * @breif 定时器初始化
