@@ -16,25 +16,17 @@ Linker/Locator:  ArmLink.exe V5.06 update 4 (build 422)
 Library Manager: ArmAr.exe V5.06 update 4 (build 422)
 Hex Converter:   FromElf.exe V5.06 update 4 (build 422)
 CPU DLL:         SARMCM3.DLL V5.23
-Dialog DLL:      DCM.DLL V1.15.0.0
+Dialog DLL:      DARMSTM.DLL V1.68.0.0
 Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.27.0.0
  
 <h2>Project:</h2>
 D:\stm32\study\1-1led.uvprojx
-Project File Date:  08/12/2025
+Project File Date:  08/14/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling Key.c...
-System\Key.h(38): warning:  #1-D: last line of file ends without a newline
-  #endif
-System\Key.c: 1 warning, 0 errors
-compiling CountSensor.c...
-System\CountSensor.c(80): warning:  #1-D: last line of file ends without a newline
-  }
-System\CountSensor.c: 1 warning, 0 errors
 compiling main.c...
 .\System\Key.h(38): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -44,50 +36,24 @@ compiling main.c...
   #endif
 .\System\IC.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
+.\System\Hanlder.h(9): warning:  #223-D: function "Key_Tick" declared implicitly
+    Key_Tick();
 .\System\Hanlder.h(18): warning:  #1-D: last line of file ends without a newline
   #endif 
 .\System\Max7219.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
-User\main.c: 6 warnings, 0 errors
-compiling IC.c...
-System\IC.c(110): warning:  #1-D: last line of file ends without a newline
-  }
-System\IC.c: 1 warning, 0 errors
-compiling Servo.c...
-System\Servo.c(57): warning:  #1-D: last line of file ends without a newline
-  }
-System\Servo.c: 1 warning, 0 errors
-compiling PWM.c...
-System\PWM.c(78): warning:  #1-D: last line of file ends without a newline
-  }
-System\PWM.c: 1 warning, 0 errors
-compiling Timer.c...
-System\Timer.h(27): warning:  #1-D: last line of file ends without a newline
-  #endif
-System\Timer.c(107): warning:  #1-D: last line of file ends without a newline
-  // }
-System\Timer.c: 2 warnings, 0 errors
-compiling LED.c...
-System\LED.c(123): warning:  #1-D: last line of file ends without a newline
-  }
-System\LED.c: 1 warning, 0 errors
-compiling Encoder.c...
-System\Encoder.h(9): warning:  #1-D: last line of file ends without a newline
-  #endif // _ENCODER_H
-System\Encoder.c(171): warning:  #1-D: last line of file ends without a newline
-  #endif
-System\Encoder.c: 2 warnings, 0 errors
+User\main.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=4706 RO-data=2358 RW-data=40 ZI-data=1632  
+Program Size: Code=4856 RO-data=2360 RW-data=44 ZI-data=1636  
 FromELF: creating hex file...
-".\Objects\1-1led.axf" - 0 Error(s), 16 Warning(s).
+".\Objects\1-1led.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Target_1
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

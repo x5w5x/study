@@ -59,7 +59,7 @@ void PWM_Init(void)
 /**
  * @brief   设置比较值(占空比0-100=0~100%)
  * 
- * @param Compare 
+ * @param Compare (0~100)
  */
 void PWM_SetCompare1(uint16_t Compare)
 {
@@ -70,7 +70,7 @@ void PWM_SetCompare1(uint16_t Compare)
 /**
  * @brief   设置频率
  * 
- * @param Prescaler 
+ * @param Prescaler (720-1:1000HZ)
  */
 void PWM_SetPrescaler(uint16_t Prescaler)
 {

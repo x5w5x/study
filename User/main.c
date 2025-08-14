@@ -8,11 +8,11 @@
 #include "OLED.h"
 // #include "CountSensor.h"
 // #include "Encoder.h"
-#include"Timer.h"
-#include"pwm.h"
+// #include"Timer.h"
+// #include"pwm.h"
 // #include"Serov.h"
-#include"IC.h"
-// #include"AD.h"
+// #include"IC.h"
+#include"AD.h"
 // #include"DMA.h"
 // #include"Serial.h"
 // #include"W25Q64.h"
@@ -25,20 +25,22 @@
 // #include"OLED_Font.h"
 #include "Hanlder.h"
 uint8_t keynum;
-int16_t num;
+int16_t num=5;
 #include"Max7219.h"
 
 int main(void)
 {	
       OLED_Init();
       LED_Init();
-      // Timer_Init();
+
       Key_Init();
-      // LED_Set(led_flash);
-      PWM_Init();
-      IC_Init();
-      PWM_SetCompare1(50);
-      PWM_SetPrescaler(720-1);
+      OLED_Clear();
+
+      
+
+    
+       
+     
 
      
 
@@ -49,9 +51,7 @@ int main(void)
 
 
 	while(1){
-   
-      OLED_ShowNum(1,1,IC_GetDuty(),5);
-      OLED_ShowNum(2,1,IC_GetFreq(),5);
+         
            
          
            

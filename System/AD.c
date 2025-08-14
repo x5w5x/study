@@ -115,7 +115,7 @@ void AD_Init(void)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);		//开启DMA1的时钟
 	
 	/*设置ADC时钟*/
-	RCC_ADCCLKConfig(RCC_PCLK2_Div6);						//选择时钟6分频，ADCCLK = 72MHz / 6 = 12MHz
+	RCC_ADCCLKConfig(RCC_PCLK2_Div6);						//选择时钟6分频，ADCCLK = 72MHz / 6 = 12MHz(ADC时钟最大为14MHz)
 	
 	/*GPIO初始化*/
 	GPIO_InitTypeDef GPIO_InitStructure;

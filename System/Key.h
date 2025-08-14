@@ -1,7 +1,7 @@
 #ifndef _KEY_H
 #define _KEY_H
 
-#define KEY_MODE 1 //0 -阻塞模式 1 -非阻塞模式
+#define KEY_MODE 0 //0 -阻塞模式 1 -非阻塞模式
 
 
 #define KEY_HOLD 0x01

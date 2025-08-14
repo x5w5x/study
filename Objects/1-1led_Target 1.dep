@@ -35,7 +35,7 @@ I (.\Library\stm32f10x_usart.h)(0x68404AA8)
 I (.\Library\stm32f10x_wwdg.h)(0x68404AA8)
 I (.\Library\misc.h)(0x68404AA7)
 F (.\Start\system_stm32f10x.h)(0x68404AA6)()
-F (.\User\main.c)(0x689CB52E)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x689DD761)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\Start\stm32f10x.h)(0x68406585)
 I (.\Start\core_cm3.h)(0x68404AA6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F606B8)
@@ -66,7 +66,7 @@ I (.\Library\stm32f10x_wwdg.h)(0x68404AA8)
 I (.\Library\misc.h)(0x68404AA7)
 I (.\System\Delay.h)(0x6130920E)
 I (.\System\led.h)(0x6899F2ED)
-I (.\System\Key.h)(0x689CAD93)
+I (.\System\Key.h)(0x689CB9C3)
 I (.\System\OLED.h)(0x688B959D)
 I (.\System\Timer.h)(0x689C9FD9)
 I (.\System\pwm.h)(0x687CE7C3)
@@ -1153,8 +1153,8 @@ I (.\Library\stm32f10x_usart.h)(0x68404AA8)
 I (.\Library\stm32f10x_wwdg.h)(0x68404AA8)
 I (.\Library\misc.h)(0x68404AA7)
 I (System\Delay.h)(0x6130920E)
-I (System\Key.h)(0x689CAD93)
-F (.\System\Key.h)(0x689CAD93)()
+I (System\Key.h)(0x689CB9C3)
+F (.\System\Key.h)(0x689CB9C3)()
 F (.\System\LED.c)(0x689C9EB7)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
 I (.\Start\stm32f10x.h)(0x68406585)
 I (.\Start\core_cm3.h)(0x68404AA6)

@@ -3,5 +3,9 @@
 
 
 void Servo_Init(void);
-void Servo_SetAngle(float angle);
+void Servo1_SetAngle(float angle);
+void Servo2_SetAngle(float angle);
+void Servo3_SetAngle(float angle);
+void Servo4_SetAngle(float angle);
+void Servo_SetAngle(uint8_t servo,float angle);
 #endif
