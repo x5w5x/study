@@ -2,7 +2,13 @@
 
 uint16_t DMA_Size=0;
 
-
+/**
+ * @brief    初始化DMA
+ * 
+ * @param AddrA   外设地址
+ * @param AddrB   内存地址
+ * @param Size   传输数据量
+ */
 void DMA_INIT(uint32_t AddrA, uint32_t AddrB, uint16_t Size)
 {
     DMA_Size=Size;

@@ -12,7 +12,7 @@
 // #include"pwm.h"
 // #include"Serov.h"
 // #include"IC.h"
-#include"AD.h"
+// #include"AD.h"
 #include"DMA.h"
 // #include"Serial.h"
 // #include"W25Q64.h"
@@ -24,19 +24,20 @@
 // #include"OLED2.h"
 // #include"OLED_Font.h"
 #include "Hanlder.h"
-uint8_t keynum;
-int16_t num=5;
+// uint8_t keynum;
+// int16_t num=5;
 #include"Max7219.h"
 
 int main(void)
 {	
-      AD_Init();
+      
       OLED_Init();
       // LED_Init();
 
       // Key_Init();
       OLED_Clear();
 
+     
       
 
     
@@ -52,11 +53,8 @@ int main(void)
 
 
 	while(1){
-         OLED_ShowNum(1,1,AD_Value[0],5);
-         OLED_ShowNum(2,1,AD_Value[1],5);
-         OLED_ShowNum(3,1,AD_Value[2],5);
-         OLED_ShowNum(4,1,AD_Value[3],5);
-           
+        
+      
          
            
 
