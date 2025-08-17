@@ -1,6 +1,11 @@
 #ifndef _HANDLER_H
 #define _HANDLER_H
 // uint16_t num;
+
+#if 0
+
+
+
 void TIM2_IRQHandler(void)
 {
    if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //判断是否是定时器2中断
@@ -13,6 +18,6 @@ void TIM2_IRQHandler(void)
    }
 }
 
-
+#endif
 
 #endif 

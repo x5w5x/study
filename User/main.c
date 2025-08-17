@@ -13,7 +13,7 @@
 // #include"Serov.h"
 // #include"IC.h"
 // #include"AD.h"
-#include"DMA.h"
+// #include"DMA.h"
 // #include"Serial.h"
 // #include"W25Q64.h"
 // #include"mpu6050.h"
@@ -30,12 +30,20 @@
 
 int main(void)
 {	
-      
+      // uint8_t i;
+//      uint8_t  arr[12];
       OLED_Init();
       // LED_Init();
 
       // Key_Init();
       OLED_Clear();
+
+   
+      
+   
+
+
+      
 
      
       
@@ -53,8 +61,7 @@ int main(void)
 
 
 	while(1){
-        
-      
+    
          
            
 
