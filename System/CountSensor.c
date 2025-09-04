@@ -9,7 +9,7 @@ uint16_t count=0;
  * @brief    计数传感器初始化
  * @param    无
  * @retval   无
- * @note     无
+ * @note     引脚PB14
  * 
  */
 void CountSensor_Init(void)

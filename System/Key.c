@@ -17,6 +17,7 @@ uint8_t Key_Num; //按键值
  * @brief   初始化按键
  * @param   无
  * @retval  无
+ * @note    引脚PB1，PB11，PB13，PB15
  */
 void Key_Init(void)
 {

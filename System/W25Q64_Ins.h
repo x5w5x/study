@@ -1,14 +1,14 @@
 #ifndef _W25Q64_INS_H_
 #define _W25Q64_INS_H_
 
-
-#define W25Q64_WRITE_ENABLE							0x06
-#define W25Q64_WRITE_DISABLE						0x04
-#define W25Q64_READ_STATUS_REGISTER_1				0x05
-#define W25Q64_READ_STATUS_REGISTER_2				0x35
-#define W25Q64_WRITE_STATUS_REGISTER				0x01
-#define W25Q64_PAGE_PROGRAM							0x02
-#define W25Q64_QUAD_PAGE_PROGRAM					0x32
+//µØÖ·
+#define W25Q64_WRITE_ENABLE							0x06 //Ð´Ê¹ÄÜ
+#define W25Q64_WRITE_DISABLE						0x04 //Ð´½ûÖ¹
+#define W25Q64_READ_STATUS_REGISTER_1				0x05 //¶Á×´Ì¬¼Ä´æÆ÷1
+#define W25Q64_READ_STATUS_REGISTER_2				0x35  //¶Á×´Ì¬¼Ä´æÆ÷2
+#define W25Q64_WRITE_STATUS_REGISTER				0x01 //Ð´×´Ì¬¼Ä´æÆ÷
+#define W25Q64_PAGE_PROGRAM							0x02 //Ò³Ð´
+#define W25Q64_QUAD_PAGE_PROGRAM					0x32  //ËÄÏßÒ³Ð´
 #define W25Q64_BLOCK_ERASE_64KB						0xD8
 #define W25Q64_BLOCK_ERASE_32KB						0x52
 #define W25Q64_SECTOR_ERASE_4KB						0x20

@@ -16,6 +16,7 @@ led_flash,
  * @brief   LED初始化
  * @param   无
  * @retval  无
+ * @note 引脚PA1,PA2
  */
 void LED_Init(void)
 {

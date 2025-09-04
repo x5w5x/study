@@ -4,6 +4,7 @@
  * @name: LightSensor_Init
  * @brief: 光敏传感器初始化
  * @param: void
+ * @note 引脚PB13
  */
 void LightSensor_Init(void)
 {

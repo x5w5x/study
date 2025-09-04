@@ -34,6 +34,14 @@ uint8_t IIC_R_SDA(void)
 
 */
 
+/**
+ * @brief   : IIC初始化
+ * @param    : 无
+ * @retval   : 无
+ * @note     : 引脚SCL-->PB10和SDA-->PB11
+ * 
+ * 
+ */
 void IIC_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;

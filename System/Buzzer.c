@@ -6,6 +6,7 @@
  * @brief ³õÊ¼»¯·äÃùÆ÷
  *  @param void
  * @return void
+ * @note Òı½ÅPB12
  */
 void Buzzer_Init(void)
 {

@@ -49,7 +49,11 @@
     
 // }
 
-
+/**
+ * @brief 初始化IC
+ * @note 引脚PA6
+ * 
+ */
 void IC_Init(void)
 {
    //开启GPIOA和TIM2时钟

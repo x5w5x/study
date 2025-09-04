@@ -15,8 +15,8 @@
 // #include"AD.h"
 // #include"DMA.h"
 // #include"Serial.h"
-// #include"W25Q64.h"
-// #include"mpu6050.h"
+#include"W25Q64.h"
+#include"mpu6050.h"
 // #include"BKP.h"
 // #include"RTC.h"
 // #include"FLASH.h"
@@ -30,16 +30,28 @@
 
 int main(void)
 {	
-      // uint8_t i;
-//      uint8_t  arr[12];
-      OLED_Init();
-      // LED_Init();
 
-      // Key_Init();
+  uint8_t A[]="hello world!";
+  uint8_t B[16];
+      
+      OLED_Init();
+     W25Q64_Init();
       OLED_Clear();
+      W25Q64_SectorErase(0x00000);
+      W25Q64_PageProgram(0x00000,A,16);
+
+      W25Q64_ReadData(0x00000,B,16);
+      OLED_ShowString(1,1,(char*)B);
+    
 
    
-      
+
+
+
+
+
+   
+    
    
 
 
