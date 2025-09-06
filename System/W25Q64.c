@@ -3,7 +3,7 @@
 #include"W25Q64_Ins.h"
 /**
  * @brief   初始化W25Q64
- * @note 引脚: SPI1 SCK->PA5  MISO->PA6  MOSI->PA7  CS->PA4
+ * @note 引脚: SPI1 SCK->PA5  MISO(Do)->PA6  MOSI(DI)->PA7  CS->PA4
  * 
  */
 void W25Q64_Init(void)

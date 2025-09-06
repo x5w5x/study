@@ -27,60 +27,39 @@
 // uint8_t keynum;
 // int16_t num=5;
 #include"Max7219.h"
-
+#include"ws2812b.h"
 int main(void)
 {	
 
-  uint8_t A[]="hello world!";
-  uint8_t B[16];
-      
+
       OLED_Init();
-     W25Q64_Init();
+
       OLED_Clear();
-      W25Q64_SectorErase(0x00000);
-      W25Q64_PageProgram(0x00000,A,16);
-
-      W25Q64_ReadData(0x00000,B,16);
-      OLED_ShowString(1,1,(char*)B);
-    
-
    
+WS2812_Init();
+for(uint16_t i=1;i<=64;i++){
+    WS2812_SetColor(i,1,1,1);
+    WS2812_Update();
+    Delay_ms(100);
+    //  WS2812_SetColor(i-1,0,0,0);
+    // WS2812_Update();
+}
+
+    // WS2812_SetColor(64,10,10,10);
+    // WS2812_Update();
 
 
 
 
 
-   
-    
-   
 
+
+
+ while(1) {
 
       
-
-     
-      
-
-    
-       
-     
-
-     
-
-
-
-      
-     
-
-
-	while(1){
-    
-         
-           
-
-
-
-
-}}
+    }
+}
 
 
 
