@@ -56,21 +56,21 @@ for(uint8_t i=0;i<WS2812_NUM;i++){
 }
 }
 
-void WS2812_SetColor(uint8_t num,uint8_t r,uint8_t g,uint8_t b){
+void WS2812_SetColor(uint8_t n,uint8_t r,uint8_t g,uint8_t b){
         uint8_t i;
         for(i=0;i<8;i++){
             if(g&(0x80>>i))
-            Color[num-1][i]=0xF8;
+            Color[n-1][i]=0xF8;
             else
-            Color[num-1][i]=0xE0;
+            Color[n-1][i]=0xE0;
             if(r&(0x80>>i))
-            Color[num-1][i+8]=0xF8;
+            Color[n-1][i+8]=0xF8;
             else
-            Color[num-1][i+8]=0xE0;
+            Color[n-1][i+8]=0xE0;
             if(b&(0x80>>i))
-            Color[num-1][i+16]=0xF8;
+            Color[n-1][i+16]=0xF8;
             else
-            Color[num-1][i+16]=0xE0;
+            Color[n-1][i+16]=0xE0;
         }
     }
 void WS2812_Update(void){
@@ -142,22 +142,22 @@ void WS2812_Init(void){
     
 }
 }
-void WS2812_SetColor(uint8_t num,uint8_t r,uint8_t g,uint8_t b){
+void WS2812_SetColor(uint8_t n,uint8_t r,uint8_t g,uint8_t b){
     
         uint8_t i;
         for(i=0;i<8;i++){
             if(g&(0x80>>i))
-            Color[num-1][i]=6;
+            Color[n-1][i]=6;
             else
-            Color[num-1][i]=2;
+            Color[n-1][i]=2;
             if(r&(0x80>>i))
-            Color[num-1][i+8]=6;
+            Color[n-1][i+8]=6;
             else
-            Color[num-1][i+8]=2;
+            Color[n-1][i+8]=2;
             if(b&(0x80>>i))
-            Color[num-1][i+16]=6;
+            Color[n-1][i+16]=6;
             else
-            Color[num-1][i+16]=2;
+            Color[n-1][i+16]=2;
         }
 }
 
@@ -202,10 +202,10 @@ void WS2812_Send24bit(uint8_t r,uint8_t g,uint8_t b){
     WS2812_SendByte(r);
     WS2812_SendByte(b);
 }
-void WS2812_SetColor(uint8_t num,uint8_t r,uint8_t g,uint8_t b){
-    Color[num-1][0]=r;
-    Color[num-1][1]=g;
-    Color[num-1][2]=b;
+void WS2812_SetColor(uint8_t n,uint8_t r,uint8_t g,uint8_t b){
+    Color[n-1][0]=r;
+    Color[n-1][1]=g;
+    Color[n-1][2]=b;
 }
 void WS2812_Update(void){
     uint8_t i;
@@ -242,3 +242,89 @@ void WS2812_Init(void){
 }
 
 #endif
+
+void WS2812_Clear(void)
+{
+    uint8_t i;
+    for(i=0;i<WS2812_NUM;i++){
+        Color[i][0]=0;
+        Color[i][1]=0;
+        Color[i][2]=0;
+    }
+    WS2812_Update();
+}
+void WS2812_Hex(uint8_t Hex,uint8_t n,uint8_t r,uint8_t g,uint8_t b){
+for(uint8_t i=8;i>=1;i--){
+  if(Hex&(1<<(i-1))) WS2812_SetColor(8*n-i+1,r,g,b);
+  else WS2812_SetColor(8*n-i+1,0,0,0);
+}
+}
+//二维数组
+/*
+    uint8_t hex[10][8]={
+0x00,0x18,0x66,0x42,0x42,0x42,0x3C,0x00,
+
+0x00,0x08,0x18,0x08,0x08,0x08,0x18,0x00,
+
+0x00,0x3C,0x42,0x06,0x08,0x30,0x7E,0x00,
+
+0x00,0x38,0x46,0x04,0x0C,0x42,0x7C,0x00,
+
+0x00,0x04,0x1C,0x24,0x44,0x3C,0x0C,0x00,
+
+0x00,0x00,0x7C,0x7C,0x02,0x42,0x7C,0x00,
+
+0x00,0x18,0x64,0x5C,0x62,0x42,0x3C,0x00,
+
+0x00,0x00,0x7C,0x08,0x08,0x10,0x10,0x00,
+
+0x00,0x3C,0x42,0x72,0x4C,0x42,0x7C,0x00,
+
+0x00,0x3C,0x42,0x42,0x7E,0x02,0x7C,0x00,
+};
+*/
+void WS2812_HexArr(uint8_t *Hex,uint8_t n,uint8_t r,uint8_t g,uint8_t b)
+{
+for(uint8_t i=1;i<=n;i++){
+  WS2812_Hex(Hex[i-1],i,r,g,b);
+}
+}
+
+//一维数组
+/*
+
+    uint8_t arr[]={
+
+        
+0x00,0x18,0x66,0x42,0x42,0x42,0x3C,0x00,
+
+0x00,0x08,0x18,0x08,0x08,0x08,0x18,0x00,
+
+0x00,0x3C,0x42,0x06,0x08,0x30,0x7E,0x00,
+
+0x00,0x38,0x46,0x04,0x0C,0x42,0x7C,0x00,
+
+0x00,0x04,0x1C,0x24,0x44,0x3C,0x0C,0x00,
+
+0x00,0x00,0x7C,0x7C,0x02,0x42,0x7C,0x00,
+
+0x00,0x18,0x64,0x5C,0x62,0x42,0x3C,0x00,
+
+0x00,0x00,0x7C,0x08,0x08,0x10,0x10,0x00,
+
+0x00,0x3C,0x42,0x72,0x4C,0x42,0x7C,0x00,
+
+0x00,0x3C,0x42,0x42,0x7E,0x02,0x7C,0x00,
+};
+*/
+void WS2812_HexSC(uint8_t *Hex,uint8_t n,uint8_t r,uint8_t g,uint8_t b)
+{
+for(uint8_t j=0;j<72;j++)
+for(uint8_t i=1;i<=n;i++){
+  WS2812_Hex(Hex[i-1+j],i,r,g,b);
+//   WS2812_Hex(Hex[i-1+j],i,rgb[j][0],rgb[j][1],rgb[j][2]);
+
+  WS2812_Update();
+  Delay_ms(10);
+}
+}
