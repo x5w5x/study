@@ -8,11 +8,11 @@
 #include "OLED.h"
 // #include "CountSensor.h"
 // #include "Encoder.h"
-// #include"Timer.h"
+#include"Timer.h"
 // #include"pwm.h"
 // #include"Serov.h"
 // #include"IC.h"
-// #include"AD.h"
+#include"AD.h"
 // #include"DMA.h"
 // #include"Serial.h"
 // #include"W25Q64.h"
@@ -27,61 +27,37 @@
 // uint8_t keynum;
 // int16_t num=5;
 // #include"Max7219.h"
-#include"ws2812b.h"
+// #include"ws2812b.h"
+#include"HCSR04.h"
 
 
 
-
-uint8_t arr[]={
-
-
-
-0x00,0x00,0x00,0x44,0x7E,0x00,0x00,0x00,
-
-0x00,0x44,0x62,0x62,0x52,0x4A,0x4C,0x00,
-
-0x00,0x64,0x42,0x42,0x52,0x5C,0x24,0x00,
-
-0x00,0x10,0x28,0x24,0x64,0x7E,0x00,0x00,
-
-0x00,0x6C,0x4C,0x4C,0x4C,0x4C,0x30,0x00,
-
-0x00,0x3C,0x54,0x4A,0x4A,0x4C,0x30,0x00,
-
-0x00,0x04,0x04,0x64,0x1C,0x04,0x00,0x00,
-
-0x00,0x7C,0x4A,0x4A,0x52,0x52,0x2C,0x00,
-
-0x00,0x5C,0x52,0x52,0x52,0x52,0x3C,0x00,
-
-
-
-
-
-
-};
 
 int main(void)
 {	
 
-
+      float distance;
       OLED_Init();
 
       OLED_Clear();
-   
-WS2812_Init();
-// WS2812_HexArr(arr,8,10,0,10);
-// WS2812_Update();
-  WS2812_HexSC(arr,8,10,0,10);
-
-
+      HCSR04_Init();
+      OLED_ShowString(1,1,"HCSR04:");
+      // OLED_ShowNum(2,1,(uint32_t)HCSR04_Read(),8);
+ 
+      // AD_Init();
 
 
 
  while(1) {
+// OLED_ShowNum(1,1,AD_Value[0],4);
+//       Delay_ms(100);
+distance=HCSR04_GetDistance();
 
-      
+      OLED_ShowNum(2,1,distance,8);
+      Delay_ms(60);
+      // OLED_ShowSignedNum(2,1,distance,8);
     }
+
 }
 
 

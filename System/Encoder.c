@@ -63,26 +63,26 @@ int16_t Encoder_Get(void)
     return Encoder_Count;
 }
 
+//与其他文件冲突记得取消注释
+// void EXTI0_IRQHandler(void)
+// {
+//     if(EXTI_GetITStatus(EXTI_Line0)==SET){
+//         if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)==0){
+//             Encoder_Count--;
+//         }
+//         EXTI_ClearITPendingBit(EXTI_Line0);
+//     }
+// }
 
-void EXTI0_IRQHandler(void)
-{
-    if(EXTI_GetITStatus(EXTI_Line0)==SET){
-        if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)==0){
-            Encoder_Count--;
-        }
-        EXTI_ClearITPendingBit(EXTI_Line0);
-    }
-}
-
-void EXTI1_IRQHandler(void)
-{
-    if(EXTI_GetITStatus(EXTI_Line1)==SET){
-        if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_0)==0){
-            Encoder_Count++;
-        }
-        EXTI_ClearITPendingBit(EXTI_Line1);
-    }
-}
+// void EXTI1_IRQHandler(void)
+// {
+//     if(EXTI_GetITStatus(EXTI_Line1)==SET){
+//         if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_0)==0){
+//             Encoder_Count++;
+//         }
+//         EXTI_ClearITPendingBit(EXTI_Line1);
+//     }
+// }
 
 
 #else
