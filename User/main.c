@@ -37,21 +37,21 @@ uint8_t num;
 int main(void)
 {   			
 	// CountSensor_Init();
-LED_Init();
-LED_On(1);
-LED_On(2);
-	// AD_Init();
-    //   OLED_Init();
+// LED_Init();
+// LED_On(1);
+// LED_On(2);
+	AD_Init();
+      OLED_Init();
 
-    //   OLED_Clear();
-    //   OLED_ShowString(1,1,"Hello World!");
+      OLED_Clear();
+      OLED_ShowString(1,1,"Hello World!");
 
 
 
  while(1) {
 // num=Get_state();
 // 	OLED_ShowNum(2,1,num,1);
-// 	OLED_ShowNum(3,1,AD_Value[0],4);
+	OLED_ShowNum(3,1,AD_Value[0],4);
 	
     }
 
