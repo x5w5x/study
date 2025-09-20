@@ -90,7 +90,7 @@ void LCD_Init(void)
 	LCD_WriteData(0x01); 
 	LCD_WriteData(0x2C); 
 	LCD_WriteData(0x2D); 
-	
+	 
 	LCD_WriteCmd(0xB4);  
 	LCD_WriteData(0x07); 
 
