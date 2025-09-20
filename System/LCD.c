@@ -67,7 +67,7 @@ void LCD_Reset(void){
     Delay_ms(50);
    
 }
-
+//Ë«·ÖÖ§
 void LCD_Init(void)
 {
     LCD_GPIO_Init();
