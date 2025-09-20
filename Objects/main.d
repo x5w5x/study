@@ -32,8 +32,3 @@
 .\objects\main.o: .\System\led.h
 .\objects\main.o: .\System\Key.h
 .\objects\main.o: .\System\OLED.h
-.\objects\main.o: .\System\Timer.h
-.\objects\main.o: .\System\pwm.h
-.\objects\main.o: .\System\IC.h
-.\objects\main.o: .\System\Hanlder.h
-.\objects\main.o: .\System\Max7219.h

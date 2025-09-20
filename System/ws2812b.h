@@ -18,3 +18,4 @@ void WS2812_HexArr(uint8_t *Hex,uint8_t n,uint8_t r,uint8_t g,uint8_t b);
 void WS2812_HexSC(uint8_t *Hex,uint8_t n,uint8_t r,uint8_t g,uint8_t b);
 #endif /* _WS2812B_H */
 
+

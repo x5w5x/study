@@ -6,9 +6,9 @@
 // #include"Buzzer.h"
 // #include"LightSensor.h"
 #include "OLED.h"
-// #include "CountSensor.h"
+#include "CountSensor.h"
 // #include "Encoder.h"
-#include"Timer.h"
+// #include"Timer.h"
 // #include"pwm.h"
 // #include"Serov.h"
 // #include"IC.h"
@@ -28,38 +28,35 @@
 // int16_t num=5;
 // #include"Max7219.h"
 // #include"ws2812b.h"
-#include"HCSR04.h"
+// #include"HCSR04.h"
 
 
 
 
+uint8_t num;
 int main(void)
-{	
+{   			
+	// CountSensor_Init();
+LED_Init();
+LED_On(1);
+LED_On(2);
+	// AD_Init();
+    //   OLED_Init();
 
-      float distance;
-      OLED_Init();
-
-      OLED_Clear();
-      HCSR04_Init();
-      OLED_ShowString(1,1,"HCSR04:");
-      // OLED_ShowNum(2,1,(uint32_t)HCSR04_Read(),8);
- 
-      // AD_Init();
+    //   OLED_Clear();
+    //   OLED_ShowString(1,1,"Hello World!");
 
 
 
  while(1) {
-// OLED_ShowNum(1,1,AD_Value[0],4);
-//       Delay_ms(100);
-distance=HCSR04_GetDistance();
-
-      OLED_ShowNum(2,1,distance,8);
-      Delay_ms(60);
-      // OLED_ShowSignedNum(2,1,distance,8);
+// num=Get_state();
+// 	OLED_ShowNum(2,1,num,1);
+// 	OLED_ShowNum(3,1,AD_Value[0],4);
+	
     }
 
 }
 
 
 
-	
+    

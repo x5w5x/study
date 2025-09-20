@@ -7,7 +7,7 @@
  * @note    : 	нч
  */
 void CountSensor_Init(void);
-uint16_t GetCount(void);
+uint8_t Get_state(void);
 
 
 

@@ -1,12 +1,11 @@
 #include"stm32f10x.h"
 #include "Delay.h"
-uint16_t count=0;
-
+uint16_t state=0;
 
 
 
 /**
- * @brief    计数传感器初始化
+ * @brief    循迹传感器初始化
  * @param    无
  * @retval   无
  * @note     引脚PB14
@@ -51,11 +50,11 @@ void CountSensor_Init(void)
  * @note     无
  * @return uint16_t 
  */
-uint16_t GetCount(void)
-{
-    return count;
-}
 
+uint8_t Get_state(void)
+{
+    return state;
+}
 
 /**
  * @brief    计算计数值
@@ -69,12 +68,15 @@ void EXTI15_10_IRQHandler(void)
 	if (EXTI_GetITStatus(EXTI_Line14) == SET)		//判断是否是外部中断14号线触发的中断
 	{
 		/*如果出现数据乱跳的现象，可再次判断引脚电平，以避免抖动*/
-		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14) == 0)
+		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14) == 1)
 		{
-			count++;					//计数值自增一次
-		}
+			state=1;					//计数值自增一次//
+            //处理循迹结果
+		}else state=0;
+        
 		EXTI_ClearITPendingBit(EXTI_Line14);		//清除外部中断14号线的中断标志位
 													//中断标志位必须清除
 													//否则中断将连续不断地触发，导致主程序卡死
 	}
+    
 }
