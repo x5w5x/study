@@ -29,7 +29,7 @@
 // #include"Max7219.h"
 // #include"ws2812b.h"
 // #include"HCSR04.h"
-
+#include"LCD.h"
 
 
 
@@ -40,18 +40,37 @@ int main(void)
 // LED_Init();
 // LED_On(1);
 // LED_On(2);
-	AD_Init();
-      OLED_Init();
+	// AD_Init();
+    //   OLED_Init();
 
-      OLED_Clear();
-      OLED_ShowString(1,1,"Hello World!");
+    //   OLED_Clear();
+    //   OLED_ShowString(1,1,"Hello World!");
+LCD_Init();
+// Lcd_Init();
+
+// Lcd_Clear(RED);  
+// LCD_SetRegion(5,5,20,20);
+//  Delay_ms(1000);
+ Lcd_Clear(BLACK);
+ Delay_ms(1000);
+  Lcd_Clear(BLUE);
+   Delay_ms(1000);
+   Lcd_Clear(GREEN);
+    Delay_ms(1000);
+    Lcd_Clear(WHITE);
+    Delay_ms(1000);
+     Lcd_Clear(YELLOW);   
+     Delay_ms(1000);
+      Lcd_Clear(GRAY0);
+      Delay_ms(1000);
+
 
 
 
  while(1) {
 // num=Get_state();
 // 	OLED_ShowNum(2,1,num,1);
-	OLED_ShowNum(3,1,AD_Value[0],4);
+	// OLED_ShowNum(3,1,AD_Value[0],4);
 	
     }
 
