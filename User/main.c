@@ -64,7 +64,7 @@ LCD_DrawCircle(50,50,20,BLACK);
 //  LCD_ShowChar(1,1,'A',Font_8x16,RED,WHITE);
 LCD_PutChar(0,0,'!',Font_8x16,BLACK,RED);
 
-LCD_PutString(10, 10, "Hello STM32!", Font_8x16, BLACK,  YELLOW);
+LCD_PutString(10, 10, "Hello World!", Font_8x16, BLACK,  YELLOW);
 // LCD_PrintNum(10, 30, 12345, Font_8x16, GREEN, BLACK);
 // LCD_PrintFloat(10, 50, 3.14159, 3, Font_8x16, RED, BLACK);
  while(1) {
