@@ -5,7 +5,7 @@
 #include "Key.h"
 // #include"Buzzer.h"
 // #include"LightSensor.h"
-#include "OLED.h"
+// #include "OLED.h"
 #include "CountSensor.h"
 // #include "Encoder.h"
 // #include"Timer.h"
@@ -30,9 +30,11 @@
 // #include"ws2812b.h"
 // #include"HCSR04.h"
 #include"LCD.h"
+/*
+*/
 
 
-
+extern FontDef Font_8x16;
 uint8_t num;
 int main(void)
 {   			
@@ -51,22 +53,20 @@ LCD_Init();
 // Lcd_Clear(RED);  
 // LCD_SetRegion(5,5,20,20);
 //  Delay_ms(1000);
- Lcd_Clear(BLACK);
- Delay_ms(1000);
-  Lcd_Clear(BLUE);
-   Delay_ms(1000);
-   Lcd_Clear(GREEN);
-    Delay_ms(1000);
-    Lcd_Clear(WHITE);
-    Delay_ms(1000);
-     Lcd_Clear(YELLOW);   
-     Delay_ms(1000);
-      Lcd_Clear(GRAY0);
-      Delay_ms(1000);
+ LCD_Clear(WHITE);
+ 
+// LCD_DrawPoint(10,10,BLACK);
+//  LCD_DrawLine(10,10,50,100,BLACK);
+//  LCD_DrawRectangle(10,10,50,50,BLACK);
+//  LCD_DrawFullRectangle(10,10,50,50,BLACK);
+LCD_DrawCircle(50,50,20,BLACK);
+// LCD_DrawFilledCircle(50,50,20,BLACK);
+//  LCD_ShowChar(1,1,'A',Font_8x16,RED,WHITE);
+LCD_PutChar(0,0,'!',Font_8x16,BLACK,RED);
 
-
-
-
+LCD_PutString(10, 10, "Hello STM32!", Font_8x16, BLACK,  YELLOW);
+// LCD_PrintNum(10, 30, 12345, Font_8x16, GREEN, BLACK);
+// LCD_PrintFloat(10, 50, 3.14159, 3, Font_8x16, RED, BLACK);
  while(1) {
 // num=Get_state();
 // 	OLED_ShowNum(2,1,num,1);

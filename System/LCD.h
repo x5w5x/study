@@ -14,7 +14,8 @@
 
 
 //
-
+#define LCD_WIDTH 128
+#define LCD_HEIGTH 160
 
 #define X_MAX_PIXEL	        128
 #define Y_MAX_PIXEL	        160
@@ -69,9 +70,27 @@ LCD_WR_SET;\
 LCD_CS_SET;\
 }
 
+ typedef struct {
+    uint8_t width;    // 字符宽度
+    uint8_t height;   // 字符高度
+    const uint8_t *data; // 字符点阵数据
+} FontDef;
 
+extern FontDef Font_8x16;
 
 void LCD_Init(void);
 void LCD_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
-void Lcd_Clear(uint16_t Color);
+void LCD_Clear(uint16_t Color);
+void LCD_DrawPoint(uint16_t x,uint16_t y,uint16_t color);
+void LCD_DrawLine(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t color);
+void LCD_DrawRectangle(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t color);
+void LCD_DrawFullRectangle(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t color);
+void LCD_DrawCircle(uint16_t x0,uint16_t y0,uint16_t r,uint16_t color);
+void LCD_DrawFilledCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) ;
+void LCD_PutString(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color, uint16_t bgcolor);
+void LCD_PutChar(uint16_t x, uint16_t y, char c, FontDef font, uint16_t color, uint16_t bgcolor); 
+void LCD_PrintNum(uint16_t x, uint16_t y, uint32_t num, FontDef font, uint16_t color, uint16_t bgcolor);
+void LCD_PrintHex(uint16_t x, uint16_t y, uint32_t num, FontDef font, uint16_t color, uint16_t bgcolor);
+void LCD_PrintFloat(uint16_t x, uint16_t y, float num, uint8_t decimals, FontDef font, uint16_t color, uint16_t bgcolor);
+
 #endif // ! 
