@@ -107,6 +107,7 @@ else y_pid=(y_pid/2039)*90;
 
 
      Servo1_SetAngle(x_ang);
+     Delay_ms(20);
      Servo2_SetAngle(y_ang);
     // Delay_s(1);
 	
