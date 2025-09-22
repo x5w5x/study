@@ -265,12 +265,14 @@ void LCD_DrawLine(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t color
 }
 
 /*
+
 	x0,y0--------------x1,y0
     |********************|                   
 	|********************|                   
 	|********************|                    
 	|********************|                    
 	x0,y1--------------x1,y1
+	
    
 */
 void LCD_DrawRectangle(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t color){
