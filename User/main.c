@@ -99,15 +99,15 @@ else y_pid=(y_pid/2039)*90;
     else x_ang=0;
  if(90+y_pid<90||90+y_pid>0)
     y_ang=90+y_pid;
-    else if(90+y_pid>=180)y_ang=180;
-    else y_ang=0;
+    else if(90+y_pid>=178)y_ang=178;
+    else y_ang=2;
     
     OLED_ShowNum(3,6,x_ang,4);
     OLED_ShowNum(4,6,y_ang,4);
 
 
      Servo1_SetAngle(x_ang);
-     Delay_ms(20);
+    //  Delay_ms(20);
      Servo2_SetAngle(y_ang);
     // Delay_s(1);
 	
