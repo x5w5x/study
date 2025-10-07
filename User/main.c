@@ -1,7 +1,7 @@
 
 #include "stm32f10x.h"
 #include "Delay.h"
-#include "led.h"
+// #include "led.h"
 #include "Key.h"
 // #include"Buzzer.h"
 // #include"LightSensor.h"
@@ -30,6 +30,17 @@
 // #include"ws2812b.h"
 // #include"HCSR04.h"
 #include "LCD.h"
+//
+
+
+
+
+
+
+
+//
+
+
 /*
  */
 // …œœ¬90£®45æ”÷–£©
@@ -116,6 +127,7 @@ int main(void)
         Servo1_SetAngle(x_ang);
         //  Delay_ms(20);
         Servo2_SetAngle(y_ang);
+
         // Delay_s(1);
     }
 }

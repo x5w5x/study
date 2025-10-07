@@ -2,7 +2,7 @@
 #define _SERIAL_H
 // #include"stdio.h"
 
-#define SERIAL_RX_MODE 2 //接收模式(0:接收单个数据 1:接收数据包 2:接收字符串)
+#define SERIAL_RX_MODE 1 //接收模式(0:接收单个数据 1:接收数据包 2:接收字符串)
 
 
 

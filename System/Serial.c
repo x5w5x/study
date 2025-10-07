@@ -120,7 +120,7 @@ void Serial_Printf(char *fmt,...)
     va_end(ap);
     Serial_SendString(str);
 }
-
+//
 uint8_t Serial_GetFlag(void)
 {
     if(Serial_RxFlag == 1)
@@ -153,6 +153,10 @@ void Serial_SendPacket(uint16_t len)
 }
 
 #if SERIAL_RX_MODE == 1
+
+uint8_t RxStart=0xEF;//数据表头
+uint8_t RxEnd=0xFE;//数据表尾
+uint8_t RXNum=5; //数据长度
 void USART1_IRQHandler(void)
 {
     static uint8_t RxSate = 0;
@@ -162,7 +166,7 @@ void USART1_IRQHandler(void)
         uint8_t RxData = USART_ReceiveData(USART1);
      if(RxSate == 0)
         {
-            if(RxData == 0xFF)
+            if(RxData == RxStart)
             {
                 RxSate = 1;
                 pRxSate=0;
@@ -171,13 +175,13 @@ void USART1_IRQHandler(void)
         else if(RxSate == 1)
         {
             Serial_RXPacket[pRxSate++] = RxData;
-            if(pRxSate == 4){
+            if(pRxSate == RXNum){
                 RxSate = 2;
             }
         }
         else if(RxSate == 2)
         {
-            if(RxData == 0xFE)
+            if(RxData == RxEnd)
             {
                 RxSate = 0;
                 Serial_RxFlag= 1;
