@@ -1,3 +1,9 @@
+/*
+ * @Author: xwx
+ * @Date: 2025-09-20 16:53:14
+ * @LastEditTime: 2025-10-09 23:50:53
+ * @FilePath: \learn\System\Timer.c
+ */
 #include"stm32f10x.h"
 #include"Timer.h"
 

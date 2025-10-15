@@ -83,6 +83,7 @@ void IC_Init(void)
    TIM_ICInitStructure.TIM_ICPrescaler=TIM_ICPSC_DIV1; //预分频
    TIM_ICInitStructure.TIM_ICSelection=TIM_ICSelection_DirectTI; //直接输入
    TIM_ICInitStructure.TIM_ICFilter=0xF; //滤波器
+   //区别
    TIM_PWMIConfig(TIM3,&TIM_ICInitStructure); //初始化捕获比较单元 //双通道自动配置
    //选择从模式触发源
    TIM_SelectInputTrigger(TIM3,TIM_TS_TI1FP1); //选择输入触发源
