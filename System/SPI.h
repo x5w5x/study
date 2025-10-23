@@ -1,7 +1,13 @@
+/*
+ * @Author: xwx
+ * @Date: 2025-09-20 16:53:14
+ * @LastEditTime: 2025-10-19 18:21:54
+ * @FilePath: \learn\System\SPI.h
+ */
 #ifndef _SPI_H_
 #define _SPI_H_
 
-#define SPI_MODE 1 //0:Ó²¼þSPI 1:Èí¼þSPI
+#define SPI_MODE 0 //0:Ó²ï¿½ï¿½SPI 1:ï¿½ï¿½ï¿½ï¿½SPI
 
 void SoftSPI_Init(void);
 void SPI_Start(void);

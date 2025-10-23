@@ -2,6 +2,7 @@
 #include"stdio.h"
 #include"stdarg.h"
 #include"Serial.h"
+
 /*
 1.开启时钟
 2.配置引脚TX复用输出RX输入
@@ -36,7 +37,7 @@ void Serial_Init(void)
     GPIO_Init(GPIOA,&GPIO_InitStructure);
     //配置USART
     USART_InitTypeDef USART_InitStructure;
-    USART_InitStructure.USART_BaudRate = 9600;//波特率
+    USART_InitStructure.USART_BaudRate = 115200;//波特率
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
     USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
     USART_InitStructure.USART_Parity = USART_Parity_No;//无校验

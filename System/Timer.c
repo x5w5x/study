@@ -57,7 +57,6 @@ void Timer_Init(void)
  * @retval нч
  *    1s=72000000/7200=10000
  */
-
 void Timer_ETRInit(void){
    
 

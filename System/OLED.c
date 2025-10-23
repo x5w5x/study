@@ -257,10 +257,10 @@ void OLED_ShowHexNum(uint8_t Line, uint8_t Column, uint32_t Number, uint8_t Leng
 
 /**
   * @brief  OLED显示数字（二进制，正数）
-  * @param  Line 起始行位置，范围：1~4
-  * @param  Column 起始列位置，范围：1~16
-  * @param  Number 要显示的数字，范围：0~1111 1111 1111 1111
-  * @param  Length 要显示数字的长度，范围：1~16
+  * @param  Line起始行位置，范围：1~4
+  * @param  Column起始列位置，范围：1~16
+  * @param  Number要显示的数字，范围：0~1111 1111 1111 1111
+  * @param  Length要显示数字的长度，范围：1~16
   * @retval 无
   */
 void OLED_ShowBinNum(uint8_t Line, uint8_t Column, uint32_t Number, uint8_t Length)
