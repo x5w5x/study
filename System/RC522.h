@@ -2,7 +2,6 @@
 #define __RC522_H
 #include "stm32f10x.h"
 
-
 /////////////////////////////////////////////////////////////////////
 //MF522命令字
 /////////////////////////////////////////////////////////////////////
@@ -130,14 +129,12 @@
 #define SPIReadByte()	SPIWriteByte(0)
 #define u8 uint8_t
 #define u32 uint32_t
-//#define delay_ms Delay_ms//HAL_Delay
-//#define delay_us Delay_ms//HAL_Delay
+
 
 u8 SPIWriteByte(u8 byte);
 void SPI1_Init(void);
 
 /**
-*   连线说明：  居-蓝桥杯
 *   1--SDA  <----->PA7 cs
 *   2--SCK  <----->PA6
 *   3--MOSI <----->PA5
@@ -148,20 +145,29 @@ void SPI1_Init(void);
 *   8--VCC <----->VCC
 **/
 
+#define RCC_GPIO_PORT GPIOA
+#define RCC_SDA_PIN GPIO_Pin_7
+#define RCC_SCK_PIN GPIO_Pin_6
+#define RCC_MOSI_PIN GPIO_Pin_5
+#define RCC_MISO_PIN GPIO_Pin_4
+#define RCC_RST_PIN GPIO_Pin_1
+
+
+
 /***********************RC522 函数宏定义**********************/
-#define          RC522_CS_Enable()        GPIO_ResetBits ( GPIOA, GPIO_Pin_7 )
-#define          RC522_CS_Disable()        GPIO_SetBits ( GPIOA, GPIO_Pin_7 )
+#define          RC522_CS_Enable()        RCC_GPIO_PORT->BRR = RCC_SDA_PIN
+#define          RC522_CS_Disable()        RCC_GPIO_PORT ->BSRR = RCC_SDA_PIN
 
-#define          RC522_Reset_Enable()     GPIO_ResetBits( GPIOA, GPIO_Pin_1 )
-#define          RC522_Reset_Disable()     GPIO_SetBits ( GPIOA, GPIO_Pin_1 )
+#define          RC522_Reset_Enable()     RCC_GPIO_PORT->BRR= RCC_RST_PIN
+#define          RC522_Reset_Disable()      RCC_GPIO_PORT->BSRR = RCC_RST_PIN
 
-#define          RC522_SCK_0()             GPIO_ResetBits( GPIOA, GPIO_Pin_6 )
-#define          RC522_SCK_1()             GPIO_SetBits ( GPIOA, GPIO_Pin_6 )
+#define          RC522_SCK_0()            RCC_GPIO_PORT->BRR = RCC_SCK_PIN
+#define          RC522_SCK_1()            RCC_GPIO_PORT->BSRR = RCC_SCK_PIN
 
-#define          RC522_MOSI_0()           GPIO_ResetBits( GPIOA, GPIO_Pin_5 )
-#define          RC522_MOSI_1()          GPIO_SetBits ( GPIOA, GPIO_Pin_5 )
+#define          RC522_MOSI_0()            RCC_GPIO_PORT->BRR = RCC_MOSI_PIN
+#define          RC522_MOSI_1()             RCC_GPIO_PORT->BSRR = RCC_MOSI_PIN
 
-#define          RC522_MISO_GET()          GPIO_ReadInputDataBit ( GPIOA, GPIO_Pin_4 )
+#define          RC522_MISO_GET()          ((RCC_GPIO_PORT->IDR & RCC_MISO_PIN) == RCC_MISO_PIN)
 
 void             RC522_Handel               (void);
 void             RC522_Init                 (void );                       //初始化
