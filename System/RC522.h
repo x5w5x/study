@@ -169,29 +169,30 @@ void SPI1_Init(void);
 
 #define          RC522_MISO_GET()          ((RCC_GPIO_PORT->IDR & RCC_MISO_PIN) == RCC_MISO_PIN)
 
-void             RC522_Handel               (void);
-void             RC522_Init                 (void );                       //初始化
-void             PcdReset                   (void );                       //复位
-void 						 WaitCardOff                (void);
-void             M500PcdConfigISOType       ( u8 type );                    //工作方式
-char             PcdRequest                 ( u8 req_code, u8 * pTagType ); //寻卡
-char             PcdAnticoll                ( u8 * pSnr);                   //读卡号
-
-char             PcdSelect                  ( u8 * pSnr );
-char             PcdAuthState               ( u8 ucAuth_mode, u8 ucAddr, u8 * pKey, u8 * pSnr );
-char             PcdWrite                   ( u8 ucAddr, u8 * pData );
-char             PcdRead                    ( u8 ucAddr, u8 * pData );
-void ShowID(u8 *p);	 //显示卡的卡号，以十六进制显示
-
-extern char* POINT_LNG;
-extern char* POINT_LAT;
-extern char* POINT_LNG_ON;
-extern char* POINT_LAT_ON;
-extern char* POINT_LNG_OFF;
-extern char* POINT_LAT_OFF;
 
 
+// extern char* POINT_LNG;
+// extern char* POINT_LAT;
+// extern char* POINT_LNG_ON;
+// extern char* POINT_LAT_ON;
+// extern char* POINT_LNG_OFF;
+// extern char* POINT_LAT_OFF;
 
-
+//函数
+void PcdAntennaOn(void);
+void PcdReset(void);
+void PcdConfigISOType(uint8_t Type);
+int8_t PcdRequest(uint8_t Req_code, uint8_t *TagType);
+int8_t PcdAnticoll(uint8_t *Snr);
+void CalulateCRC(uint8_t *InData, uint8_t Len, uint8_t *OutData);
+int8_t PcdSelect(uint8_t *Snr);
+int8_t PcdAuthState(uint8_t Auth_mode, uint8_t Addr, uint8_t *Key, uint8_t *Snr);
+int8_t PcdWrite(uint8_t Addr, uint8_t *Data);
+int8_t PcdRead(uint8_t Addr, uint8_t *Data);
+int8_t PcdHalt(void);
+void IC_CMT(uint8_t *UID, uint8_t *KEY, uint8_t RW, uint8_t *Dat);
+void ShowID(uint8_t *p);
+void WaitCardOff(void);
+void RC522_Init(void);
 #endif
 
