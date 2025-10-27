@@ -1,7 +1,7 @@
 /*
  * @Author: xwx
  * @Date: 2025-09-20 16:59:21
- * @LastEditTime: 2025-10-26 16:46:24
+ * @LastEditTime: 2025-10-27 20:02:11
  * @FilePath: \learn\User\main.c
  */
 
@@ -51,8 +51,14 @@ int main()
                         status = PcdRead(4,RFID);
                         if (status == MI_OK) {
                             Serial_Printf("Read ok!!!\r\n");
-                            Serial_Printf("RFID>>>%02X%02X%02X%02X\r\n", RFID[0], RFID[1], RFID[2], RFID[3]);
-                            
+                            Serial_Printf("余额>>>%X0元\r\n",RFID[0]);
+                            Serial_Printf("RFID>>>0:%02X 1:%02X 2:%02X 3:%02X\r\n", RFID[0], RFID[1], RFID[2], RFID[3]);
+                            RFID[0]++;
+                            status = MI_ERR;
+                            status = PcdWrite(4,RFID);
+                            if (status == MI_OK) {
+                                Serial_Printf("Write ok!!!\r\n");
+                            }
                         }
                     }
                 }

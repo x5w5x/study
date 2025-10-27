@@ -740,7 +740,7 @@ void RC522_Init(void)
 //                                 if (status == MI_OK) {
 //                                     Serial_Printf(">>>>>>Ë¢¿¨³É¹¦£¡\r\n");
 //                                     blance = RFID[0] * 16 + RFID[1];
-//                                     Serial_Printf(">>>>>>Óà¶î£º%d\r\n", blance);
+//                                     Serial_Printf(">>>>>>Óà¶î:%d\r\n", blance);
 //                                 }
 //                                 status = MI_ERR;
 //                                 Delay_ms(100);
@@ -762,3 +762,76 @@ void RC522_Init(void)
 
 //ÓÃ·¨
 
+/*
+
+#include "stm32f10x.h"
+#include "Delay.h"
+#include "rc522.h"
+#include "serial.h"
+
+uint8_t status;
+extern uint8_t CT[];
+extern uint8_t SN[];
+extern uint8_t RFID[];
+uint8_t card_1[4]  = {0x4A, 0xD6, 0x67, 0x1A};
+uint8_t card_1_bit = 0;
+extern uint8_t key[6];
+int main()
+{
+
+    Serial_Init();
+    Serial_Printf("RFID Start ......\n");
+    RC522_Init(); //
+    Delay_ms(300);
+
+    while (1) {
+        // RC522_Handel();
+        status = PcdRequest(PICC_REQALL, CT); // Ñ°¿¨
+        if (status == MI_OK) {
+            status = MI_ERR;
+            status = PcdAnticoll(SN); // ·À³å×²
+            if (status == MI_OK) {
+
+                status = MI_ERR;
+                Serial_Printf("======================\n");
+                ShowID(SN);
+                if (SN[0] == card_1[0] && SN[1] == card_1[1] && SN[2] == card_1[2] && SN[3] == card_1[3]) {
+                    Serial_Printf("User>>>CARD_1\r\n");
+                    card_1_bit = 1;
+                }
+                status = PcdSelect(SN);
+                if (status == MI_OK) {
+                    status = MI_ERR;
+                    Serial_Printf("select card ok!!!\r\n");
+                    status = PcdAuthState(PICC_AUTHENT1A, 0x07, key, SN);
+                    if (status == MI_OK) {
+                        Serial_Printf("Auth ok!!!\r\n");
+                        status = MI_ERR;
+                        status = PcdRead(4,RFID);
+                        if (status == MI_OK) {
+                            Serial_Printf("Read ok!!!\r\n");
+                            Serial_Printf("Óà¶î>>>%X0Ôª\r\n",RFID[0]);
+                            Serial_Printf("RFID>>>0:%02X 1:%02X 2:%02X 3:%02X\r\n", RFID[0], RFID[1], RFID[2], RFID[3]);
+                            RFID[0]++;
+                            status = MI_ERR;
+                            status = PcdWrite(4,RFID);
+                            if (status == MI_OK) {
+                                Serial_Printf("Write ok!!!\r\n");
+                            }
+                        }
+                    }
+                }
+            }
+
+            Serial_Printf("======================\n");
+            WaitCardOff();
+        } else {
+            Serial_Printf("NO Card\n");
+        }
+
+        Delay_ms(300);
+        // Serial_Printf("#");
+    }
+}
+  
+ */
